@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
 
@@ -24,6 +25,7 @@ const dpColumn = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
     <Background>
       <Container fixed>
@@ -65,7 +67,13 @@ const Login = () => {
                   <Grid item xs={10}>
                     <ButtonGroup sx={BtnGroup}>
                       <Button>Login</Button>
-                      <Button>SignUp</Button>
+                      <Button
+                        onClick={() => {
+                          navigate("/signup");
+                        }}
+                      >
+                        SignUp
+                      </Button>
                     </ButtonGroup>
                   </Grid>
                   <Grid>

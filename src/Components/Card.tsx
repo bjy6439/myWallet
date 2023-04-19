@@ -7,28 +7,30 @@ const style = {
 
 const Card = () => {
   return (
-    <Box sx={style}>
-      <Grid container p={2}>
-        <Grid item xs={2} sm={2} md={2} textAlign="center">
-          1
+    <Container>
+      <Box sx={style}>
+        <Grid container p={2}>
+          <Grid item xs={2} sm={2} md={2} textAlign="center">
+            1
+          </Grid>
+          <Grid item xs={10} sm={10} md={10}>
+            2
+          </Grid>
+          <Grid item xs={4} sm={4} md={4}>
+            3
+          </Grid>
+          <Grid item xs={4} sm={4} md={4}>
+            4
+          </Grid>
+          <Grid item xs={4} sm={4} md={4}>
+            5
+          </Grid>
+          <Grid item xs={12} sm={12} md={12}>
+            6
+          </Grid>
         </Grid>
-        <Grid item xs={10} sm={10} md={10}>
-          2
-        </Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          3
-        </Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          4
-        </Grid>
-        <Grid item xs={4} sm={4} md={4}>
-          5
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          6
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
