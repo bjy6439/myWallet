@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "./AlertModal";
@@ -8,18 +8,14 @@ const Navigation = () => {
   const [navBtn, setNavBtn] = useState<string>("");
   const navigate = useNavigate();
   return (
-    <>
+    <Container>
       <Box
         sx={{
           bgcolor: "#f8fafb",
-          borderRadius: "5px",
-          display: "flex",
-          justifyContent: "center",
-          height: 700,
         }}
       >
-        <Grid>
-          <Grid>
+        <Grid container>
+          <Grid item xs={12}>
             <Button
               onClick={() => {
                 navigate("/");
@@ -30,32 +26,34 @@ const Navigation = () => {
               </Typography>
             </Button>
           </Grid>
-          <Stack spacing={2} direction="column" paddingLeft={4}>
-            {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
-              return (
-                <Grid item key={id}>
-                  <Button
-                    variant="text"
-                    onClick={() => {
-                      if (name === "Login") {
-                        setNavBtn(name);
-                        navigate("/login");
-                      } else {
-                        setModalOn(true);
-                        setNavBtn(name);
-                      }
-                    }}
-                  >
-                    {name}
-                  </Button>
-                </Grid>
-              );
-            })}
-          </Stack>
+          <Grid item xs={12} justifyContent="center" alignItems="center">
+            <Grid container mb={3} textAlign="center">
+              {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
+                return (
+                  <Grid key={id} xs={3} sm={3} md={12} textAlign="center">
+                    <Button
+                      variant="text"
+                      onClick={() => {
+                        if (name === "Login") {
+                          setNavBtn(name);
+                          navigate("/login");
+                        } else {
+                          setModalOn(true);
+                          setNavBtn(name);
+                        }
+                      }}
+                    >
+                      {name}
+                    </Button>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Grid>
         </Grid>
       </Box>
       <AlertModal modalOn={modalOn} setModalOn={setModalOn} />
-    </>
+    </Container>
   );
 };
 

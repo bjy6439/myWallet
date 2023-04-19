@@ -1,25 +1,49 @@
 import { Box, Container, Grid } from "@mui/material";
 import styled from "styled-components";
+import Card from "../Components/Card";
 import Navigation from "../Components/Navigation";
+
+const cardBox = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
 const Main = () => {
   return (
     <Background>
-      <Container fixed>
+      <Container>
         <Box
           sx={{
             bgcolor: "background.paper",
             boxShadow: 5,
             borderRadius: 2,
-            minWidth: 300,
           }}
         >
-          <Grid container>
-            <Grid item xs={5} sm={5} md={3}>
+          <Grid container sx={cardBox}>
+            <Grid item xs={12} sm={12} md={5} lg={3}>
               <Navigation />
             </Grid>
-            <Grid item xs={7} sm={7} md={9}>
-              <div>asdsa</div>
+            <Grid item xs={12} sm={12} md={7} lg={9}>
+              <Box>
+                <Grid container spacing={2} justifyContent="center">
+                  <Grid item xs={12} sm={10} md={10} lg={10}>
+                    <Card />
+                  </Grid>
+                  <Grid item xs={12} sm={5} md={5} lg={5}>
+                    <Card />
+                  </Grid>
+                  <Grid item xs={12} sm={5} md={5} lg={5}>
+                    <Card />
+                  </Grid>
+                  <Grid item xs={12} sm={5} md={5} lg={5}>
+                    <Card />
+                  </Grid>
+                  <Grid item xs={12} sm={5} md={5} lg={5}>
+                    <Card />
+                  </Grid>
+                </Grid>
+              </Box>
             </Grid>
           </Grid>
         </Box>

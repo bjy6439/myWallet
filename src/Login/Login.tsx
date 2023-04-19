@@ -10,6 +10,19 @@ import {
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
 
+const display = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const dpColumn = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 const Login = () => {
   return (
     <Background>
@@ -19,54 +32,48 @@ const Login = () => {
             bgcolor: "background.paper",
             boxShadow: 5,
             borderRadius: 2,
-            height: 700,
-            display: "flex",
-            alignItems: "center",
+            height: 800,
           }}
         >
-          <Grid container>
-            <Grid item xs={5} sm={5} md={3}>
+          <Grid container alignItems="center" justifyContent="center">
+            <Grid item xs={12} sm={12} md={4} lg={3}>
               <Navigation />
             </Grid>
-            <Grid
-              item
-              xs={7}
-              sm={7}
-              md={9}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Box sx={Formstyle}>
-                <Grid item>
-                  <Typography mb={2} fontSize={30}>
-                    Wallet Login
-                  </Typography>
-                </Grid>
-                <Grid container justifyContent="center">
-                  <Grid item>
-                    <TextField
-                      sx={InputStyle}
-                      label="ID를 입력해주세요."
-                    ></TextField>
+            <Grid item xs={12} sm={12} md={8} lg={8} sx={display}>
+              <Grid item sx={Formstyle} xs={12} sm={12} md={7}>
+                <Grid item sx={dpColumn}>
+                  <Grid item xs={10}>
+                    <Typography mb={2} fontSize={30}>
+                      Wallet Login
+                    </Typography>
                   </Grid>
-                </Grid>
-                <Grid container justifyContent="center">
-                  <Grid item>
+                  <Grid item xs={10}>
+                    <Grid>
+                      <TextField
+                        sx={InputStyle}
+                        label="ID를 입력해주세요."
+                      ></TextField>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={10}>
                     <TextField
                       sx={InputStyle}
                       type="password"
                       label="PW를 입력해주세요."
                     ></TextField>
                   </Grid>
+                  <Grid item xs={10}>
+                    <ButtonGroup sx={BtnGroup}>
+                      <Button>Login</Button>
+                      <Button>SignUp</Button>
+                    </ButtonGroup>
+                  </Grid>
+                  <Grid>
+                    <Button>카카오로 로그인하기</Button>
+                    <Button>네이버로 로그인하기</Button>
+                  </Grid>
                 </Grid>
-                <ButtonGroup sx={BtnGroup}>
-                  <Button>Login</Button>
-                  <Button>SignUp</Button>
-                </ButtonGroup>
-                <Button>카카오로 로그인하기</Button>
-                <Button>네이버로 로그인하기</Button>
-              </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Box>
@@ -79,12 +86,11 @@ export default Login;
 
 const Formstyle = {
   borderRadius: 4,
-  padding: 4,
   boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "center",
+  // alignItems: "center",
 };
 
 const InputStyle = {
