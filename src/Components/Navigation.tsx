@@ -1,17 +1,26 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AlertModal from "./AlertModal";
 
 const Navigation = () => {
   const [modalOn, setModalOn] = useState<boolean>(false);
   const [navBtn, setNavBtn] = useState<string>("");
-  console.log(navBtn);
+  const navigate = useNavigate();
   return (
     <>
-      <Box sx={{ bgcolor: "#f8fafb", borderRadius: "5px" }}>
+      <Box
+        sx={{
+          bgcolor: "#f8fafb",
+          borderRadius: "5px",
+          display: "flex",
+          justifyContent: "center",
+          height: 700,
+        }}
+      >
         <Grid>
           <Grid>
-            <Typography variant="h4" padding={4}>
+            <Typography variant="h4" padding={4} mt={2}>
               My Wallet
             </Typography>
           </Grid>
@@ -24,6 +33,7 @@ const Navigation = () => {
                     onClick={() => {
                       if (name === "Login") {
                         setNavBtn(name);
+                        navigate("/login");
                       } else {
                         setModalOn(true);
                         setNavBtn(name);
