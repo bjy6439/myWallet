@@ -6,10 +6,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Navigation from "../Components/Navigation";
 
 const SignUp = () => {
+  const nav = useNavigate();
   return (
     <Background>
       <Container fixed>
@@ -42,9 +43,15 @@ const SignUp = () => {
                 }}
               >
                 <Grid>
-                  <Typography variant="h4" mb={3}>
-                    간단 회원가입
-                  </Typography>
+                  <Button
+                    onClick={() => {
+                      nav("/");
+                    }}
+                  >
+                    <Typography variant="h4" p={3}>
+                      My Wallet
+                    </Typography>
+                  </Button>
                 </Grid>
                 <Grid
                   container
@@ -55,37 +62,22 @@ const SignUp = () => {
                   padding={2}
                   sx={Formstyle}
                 >
-                  <Grid item xs={12} sm={12} md={12}>
-                    <TextField
-                      sx={InputStyle}
-                      type="email"
-                      variant="standard"
-                      label="E-mail을 입력해주세요."
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12}>
-                    <TextField
-                      sx={InputStyle}
-                      variant="standard"
-                      label="ID를 입력해주세요."
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12}>
-                    <TextField
-                      sx={InputStyle}
-                      type="password"
-                      variant="standard"
-                      label="PW를 입력해주세요."
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12}>
-                    <TextField
-                      sx={InputStyle}
-                      type="password"
-                      variant="standard"
-                      label="PW 확인"
-                    ></TextField>
-                  </Grid>
+                  <Typography variant="h4" marginY={2}>
+                    간단 회원가입
+                  </Typography>
+
+                  {SIGNUPINPUTS.map(({ id, type, label }) => {
+                    return (
+                      <Grid item xs={12} sm={12} md={12} key={id}>
+                        <TextField
+                          sx={InputStyle}
+                          type={type}
+                          variant="standard"
+                          label={label}
+                        ></TextField>
+                      </Grid>
+                    );
+                  })}
                   <Grid item xs={12} sm={12} md={12}>
                     <Button variant="text">회원가입</Button>
                   </Grid>
@@ -107,17 +99,12 @@ const Formstyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  // alignItems: "center",
 };
 
 const InputStyle = {
   width: 250,
   height: 50,
   margin: 3,
-};
-
-const BtnGroup = {
-  margin: 2,
 };
 
 const Background = styled.div`
@@ -127,3 +114,11 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const SIGNUPINPUTS = [
+  { id: 1, type: "emain", label: "E-mail을 입력해주세요." },
+  { id: 1, type: "text", label: "ID를 입력해주세요." },
+  { id: 1, type: "password", label: "PW를 입력해주세요." },
+  { id: 1, type: "password", label: "PW 확인" },
+  { id: 1, type: "tel", label: "휴대폰 번호" },
+];

@@ -7,12 +7,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AlertModal from "../Components/AlertModal";
 import Navigation from "../Components/Navigation";
 
 const display = {
   display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
 };
@@ -25,7 +28,8 @@ const dpColumn = {
 };
 
 const Login = () => {
-  const navigate = useNavigate();
+  const [modalOn, setModalOn] = useState<boolean>(false);
+  const nav = useNavigate();
   return (
     <Background>
       <Container fixed>
@@ -35,17 +39,28 @@ const Login = () => {
             boxShadow: 5,
             borderRadius: 2,
             height: 800,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Grid container alignItems="center" justifyContent="center">
-            <Grid item xs={12} sm={12} md={4} lg={3}>
-              <Navigation />
-            </Grid>
             <Grid item xs={12} sm={12} md={8} lg={8} sx={display}>
-              <Grid item sx={Formstyle} xs={12} sm={12} md={7}>
+              <Grid>
+                <Button
+                  onClick={() => {
+                    nav("/");
+                  }}
+                >
+                  <Typography variant="h4" p={3}>
+                    My Wallet
+                  </Typography>
+                </Button>
+              </Grid>
+              <Grid item sx={Formstyle} xs={12} sm={12} md={10}>
                 <Grid item sx={dpColumn}>
                   <Grid item xs={10}>
-                    <Typography mb={2} fontSize={30}>
+                    <Typography p={3} fontSize={30}>
                       Wallet Login
                     </Typography>
                   </Grid>
@@ -66,19 +81,26 @@ const Login = () => {
                   </Grid>
                   <Grid item xs={10}>
                     <ButtonGroup sx={BtnGroup}>
-                      <Button>Login</Button>
+                      <Button variant="text">Login</Button>
                       <Button
+                        variant="text"
                         onClick={() => {
-                          navigate("/signup");
+                          nav("/signup");
                         }}
                       >
                         SignUp
                       </Button>
                     </ButtonGroup>
                   </Grid>
-                  <Grid>
+                  <Grid item p={3}>
                     <Button>카카오로 로그인하기</Button>
-                    <Button>네이버로 로그인하기</Button>
+                    <Button
+                      onClick={() => {
+                        setModalOn(true);
+                      }}
+                    >
+                      네이버로 로그인하기
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
@@ -86,6 +108,7 @@ const Login = () => {
           </Grid>
         </Box>
       </Container>
+      <AlertModal modalOn={modalOn} setModalOn={setModalOn} />
     </Background>
   );
 };
@@ -98,7 +121,6 @@ const Formstyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  // alignItems: "center",
 };
 
 const InputStyle = {
@@ -108,7 +130,7 @@ const InputStyle = {
 };
 
 const BtnGroup = {
-  margin: 2,
+  padding: 3,
 };
 
 const Background = styled.div`
