@@ -20,9 +20,15 @@ const Navigation = () => {
       >
         <Grid>
           <Grid>
-            <Typography variant="h4" padding={4} mt={2}>
-              My Wallet
-            </Typography>
+            <Button
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <Typography variant="h4" padding={4} mt={2}>
+                My Wallet
+              </Typography>
+            </Button>
           </Grid>
           <Stack spacing={2} direction="column" paddingLeft={4}>
             {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
