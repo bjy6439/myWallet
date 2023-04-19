@@ -26,9 +26,7 @@ const Login = () => {
         >
           <Grid container>
             <Grid item xs={5} sm={5} md={3}>
-              <Grid item justifyContent="center" alignItems="center">
-                <Navigation />
-              </Grid>
+              <Navigation />
             </Grid>
             <Grid
               item
@@ -39,41 +37,36 @@ const Login = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Grid sx={LoginFormBox}>
-                <Grid container>
-                  <Box sx={Formstyle}>
-                    <Grid item>
-                      <Typography mb={2} fontSize={30}>
-                        Wallet Login
-                      </Typography>
-                    </Grid>
-                    <Grid container justifyContent="center">
-                      <Grid item>
-                        <TextField
-                          sx={InputStyle}
-                          placeholder="ID를 입력해주세요."
-                        ></TextField>
-                      </Grid>
-                    </Grid>
-                    <Grid container justifyContent="center">
-                      <Grid item>
-                        <TextField
-                          sx={InputStyle}
-                          type="password"
-                          placeholder="PW를 입력해주세요."
-                        ></TextField>
-                      </Grid>
-                    </Grid>
-
-                    <ButtonGroup sx={BtnGroup}>
-                      <Button>Login</Button>
-                      <Button>SignUp</Button>
-                    </ButtonGroup>
-                    <Button>카카오로 로그인하기</Button>
-                    <Button>네이버로 로그인하기</Button>
-                  </Box>
+              <Box sx={Formstyle}>
+                <Grid item>
+                  <Typography mb={2} fontSize={30}>
+                    Wallet Login
+                  </Typography>
                 </Grid>
-              </Grid>
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <TextField
+                      sx={InputStyle}
+                      label="ID를 입력해주세요."
+                    ></TextField>
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <TextField
+                      sx={InputStyle}
+                      type="password"
+                      label="PW를 입력해주세요."
+                    ></TextField>
+                  </Grid>
+                </Grid>
+                <ButtonGroup sx={BtnGroup}>
+                  <Button>Login</Button>
+                  <Button>SignUp</Button>
+                </ButtonGroup>
+                <Button>카카오로 로그인하기</Button>
+                <Button>네이버로 로그인하기</Button>
+              </Box>
             </Grid>
           </Grid>
         </Box>
@@ -92,12 +85,6 @@ const Formstyle = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-};
-
-const LoginFormBox = {
-  display: "flex",
-  justifyContent: "center",
-  height: 400,
 };
 
 const InputStyle = {

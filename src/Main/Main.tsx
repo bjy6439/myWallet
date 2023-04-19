@@ -15,10 +15,10 @@ const Main = () => {
           }}
         >
           <Grid container>
-            <Grid item>
+            <Grid item xs={5} sm={5} md={3}>
               <Navigation />
             </Grid>
-            <Grid item>
+            <Grid item xs={7} sm={7} md={9}>
               <div>asdsa</div>
             </Grid>
           </Grid>
