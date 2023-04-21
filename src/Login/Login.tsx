@@ -7,29 +7,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AlertModal from "../Components/AlertModal";
-import Navigation from "../Components/Navigation";
-
-const display = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const dpColumn = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
+import { onModal } from "../Store/modalSlice";
+import { login } from "../Store/authSlice";
 
 const Login = () => {
-  const [modalOn, setModalOn] = useState<boolean>(false);
   const nav = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <Background>
       <Container fixed>
@@ -93,10 +81,17 @@ const Login = () => {
                     </ButtonGroup>
                   </Grid>
                   <Grid item p={3}>
-                    <Button>카카오로 로그인하기</Button>
                     <Button
                       onClick={() => {
-                        setModalOn(true);
+                        dispatch(login());
+                        nav("/");
+                      }}
+                    >
+                      카카오로 로그인하기
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        dispatch(onModal());
                       }}
                     >
                       네이버로 로그인하기
@@ -108,7 +103,7 @@ const Login = () => {
           </Grid>
         </Box>
       </Container>
-      <AlertModal modalOn={modalOn} setModalOn={setModalOn} />
+      <AlertModal />
     </Background>
   );
 };
@@ -140,3 +135,17 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const display = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const dpColumn = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};

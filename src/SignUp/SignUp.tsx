@@ -11,6 +11,7 @@ import styled from "styled-components";
 
 const SignUp = () => {
   const nav = useNavigate();
+
   return (
     <Background>
       <Container fixed>
@@ -53,15 +54,7 @@ const SignUp = () => {
                     </Typography>
                   </Button>
                 </Grid>
-                <Grid
-                  container
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={10}
-                  padding={2}
-                  sx={Formstyle}
-                >
+                <Grid container padding={2} sx={Formstyle}>
                   <Typography variant="h4" marginY={2}>
                     간단 회원가입
                   </Typography>
@@ -117,8 +110,8 @@ const Background = styled.div`
 
 const SIGNUPINPUTS = [
   { id: 1, type: "emain", label: "E-mail을 입력해주세요." },
-  { id: 1, type: "text", label: "ID를 입력해주세요." },
-  { id: 1, type: "password", label: "PW를 입력해주세요." },
-  { id: 1, type: "password", label: "PW 확인" },
-  { id: 1, type: "tel", label: "휴대폰 번호" },
+  { id: 2, type: "text", label: "ID를 입력해주세요." },
+  { id: 3, type: "password", label: "PW를 입력해주세요." },
+  { id: 4, type: "password", label: "PW 확인" },
+  { id: 5, type: "tel", label: "휴대폰 번호" },
 ];

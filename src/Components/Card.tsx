@@ -1,15 +1,50 @@
 import { Box, Container, Grid } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../Store/dataSlice";
+import { RootState } from "../Store/store";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
 };
 
 const Card = () => {
+  const myData = useSelector((state: RootState) => state.mydata.myData);
+  const dispatch = useDispatch();
+
+  console.log(myData);
+  ///
+  const [xrpInfo, setXrpInfo] = useState([]);
+
+  useEffect(() => {
+    const getApi = async () => {
+      const options = {
+        method: "GET",
+        headers: { accept: "application/json" },
+      };
+      await axios
+        .get(
+          "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=200",
+          options
+        )
+        .then((res: any) => {
+          setXrpInfo(res.data);
+        });
+    };
+    getApi();
+  }, []);
+
   return (
     <Container>
       <Box sx={style}>
-        <Grid container p={2}>
+        <Grid
+          container
+          p={2}
+          onClick={() => {
+            dispatch(getData());
+          }}
+        >
           <Grid item xs={2} sm={2} md={2} textAlign="center">
             1
           </Grid>
