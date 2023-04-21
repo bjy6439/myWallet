@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import Navigation from "../Components/Navigation";
 
 const DashBoard = () => {
   const [xrpInfo, setXrpInfo] = useState([]);
+  const [dataName, setDataName] = useState("BTC");
 
   useEffect(() => {
     const getApi = async () => {
@@ -22,7 +23,7 @@ const DashBoard = () => {
     };
     getApi();
   }, []);
-  console.log(xrpInfo[0]);
+
   return (
     <Background>
       <Container>
@@ -38,23 +39,65 @@ const DashBoard = () => {
               <Navigation />
             </Grid>
             <Grid item xs={12} sm={12} md={7} lg={9}>
-              <Box
-                sx={{
-                  width: 800,
-                  height: 800,
-                  overflow: "scroll",
-                }}
-              >
-                <Grid container spacing={2} justifyContent="center">
-                  {xrpInfo.map((item, idx) => {
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Grid
+                  container
+                  sx={{
+                    height: 100,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {BtnName.map(({ id, name }) => {
                     return (
-                      <Grid item xs={12} sm={12} md={6}>
-                        <Card key={idx} item={item} />
+                      <Grid
+                        item
+                        key={id}
+                        xs={4}
+                        sm={4}
+                        md={4}
+                        lg={4}
+                        textAlign="center"
+                      >
+                        <Button
+                          onClick={() => {
+                            setDataName(name);
+                          }}
+                        >
+                          {name}
+                        </Button>
                       </Grid>
                     );
                   })}
                 </Grid>
-              </Box>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: 600,
+                    overflow: "scroll",
+                    padding: 4,
+                    display: "flex",
+                    justifyContent: "center",
+                    "&::-webkit-scrollbar": { display: "none" },
+                  }}
+                >
+                  <Grid container spacing={2} justifyContent="center">
+                    {xrpInfo
+                      .filter(({ market }: { market: string }) => {
+                        return market.split("-")[0] === dataName;
+                      })
+                      .map((item, idx) => {
+                        return (
+                          <Grid key={idx} item xs={12} sm={12} md={6}>
+                            <Card item={item} />
+                          </Grid>
+                        );
+                      })}
+                  </Grid>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Box>
@@ -77,3 +120,9 @@ const cardBox = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+const BtnName = [
+  { id: 1, name: "BTC" },
+  { id: 2, name: "KRW" },
+  { id: 3, name: "USDT" },
+];
