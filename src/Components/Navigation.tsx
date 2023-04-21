@@ -38,7 +38,13 @@ const Navigation = () => {
                     <Button
                       variant="text"
                       onClick={() => {
-                        dispatch(onModal());
+                        if (name === "대시보드") {
+                          navigate("/");
+                        } else if (name === "모든 거래") {
+                          navigate("/all");
+                        } else {
+                          dispatch(onModal());
+                        }
                       }}
                     >
                       {name}

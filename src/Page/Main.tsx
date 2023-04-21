@@ -1,13 +1,7 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Card, Container, Grid } from "@mui/material";
+import React from "react";
 import styled from "styled-components";
-import Card from "../Components/Card";
 import Navigation from "../Components/Navigation";
-
-const cardBox = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
 
 const Main = () => {
   return (
@@ -28,6 +22,7 @@ const Main = () => {
               <Box>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} md={10} lg={10}>
+                    1
                     <Card />
                   </Grid>
                   <Grid item xs={12} sm={5} md={5} lg={5}>
@@ -61,3 +56,8 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const cardBox = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};

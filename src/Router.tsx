@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
-import Main from "./Main/Main";
+import DashBoard from "./Page/DashBoard";
+import Main from "./Page/Main";
 import SignUp from "./SignUp/SignUp";
 
 const Router = () => {
@@ -8,6 +9,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/all" element={<DashBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>

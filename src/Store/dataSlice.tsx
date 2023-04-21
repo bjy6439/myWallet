@@ -9,29 +9,28 @@ const initialState: modalState = {
   myData: [],
 };
 
-const getApi = async () => {
-  const options = {
-    method: "GET",
-    headers: { accept: "application/json" },
-  };
-  await axios
-    .get(
-      "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=200",
-      options
-    )
-    .then((res: any) => {
-      return res.data;
-    });
-};
-
 export const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
     getData: (state) => {
-      const data = getApi();
-
-      console.log(state.myData.push(data));
+      const getApi = async () => {
+        const options = {
+          method: "GET",
+          headers: { accept: "application/json" },
+        };
+        await axios
+          .get(
+            "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=1",
+            options
+          )
+          .then((res: any) => {
+            console.log(res.data, "!!");
+            // state.myData.push(res.data);
+          });
+      };
+      getApi();
+      console.log(state.myData, "??");
     },
   },
 });
