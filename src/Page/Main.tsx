@@ -1,9 +1,30 @@
 import { Box, Card, Container, Grid } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
 
 const Main = () => {
+  const [myCoin, setMycoin] = useState([]);
+  const getApi = async () => {
+    const options = {
+      method: "GET",
+      headers: { accept: "application/json" },
+    };
+    await axios
+      .get(
+        "https://api.upbit.com/v1/candles/minutes/10?market=KRW-BTC&count=60",
+        options
+      )
+      .then((res: any) => {
+        setMycoin(res.data);
+      });
+  };
+
+  useEffect(() => {
+    getApi();
+  });
+
   return (
     <Background>
       <Container>

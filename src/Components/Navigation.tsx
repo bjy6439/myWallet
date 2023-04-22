@@ -1,14 +1,14 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "./AlertModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { onModal } from "../Store/modalSlice";
 import { logout } from "../Store/authSlice";
-import { RootState } from "../Store/store";
+import { RootState, useAppDispatch } from "../Store/store";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
 
   return (

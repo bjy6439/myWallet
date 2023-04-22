@@ -1,40 +1,42 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AnyAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { AppDispatch } from "./store";
 
 export interface modalState {
   myData: any[];
+  status: string;
 }
 
 const initialState: modalState = {
   myData: [],
+  status: "",
 };
+
+export const getAllData = createAsyncThunk(
+  "dataSlice,getAllData", // 타입
+  async () => {
+    const resp = await axios.get(
+      "https://api.upbit.com/v1/market/all?isDetails=false",
+      {
+        headers: { accept: "application/json" },
+      }
+    );
+    const data = resp.data;
+    return data;
+  }
+);
 
 export const dataSlice = createSlice({
   name: "data",
   initialState,
-  reducers: {
-    getData: (state) => {
-      const getApi = async () => {
-        const options = {
-          method: "GET",
-          headers: { accept: "application/json" },
-        };
-        await axios
-          .get(
-            "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=1",
-            options
-          )
-          .then((res: any) => {
-            console.log(res.data, "!!");
-            // state.myData.push(res.data);
-          });
-      };
-      getApi();
-      console.log(state.myData, "??");
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAllData.fulfilled, (state, action: AnyAction) => {
+      state.myData = action.payload;
+      state.status = "Success";
+    });
   },
 });
 
-export const { getData } = dataSlice.actions;
-
+export const {} = dataSlice.actions;
 export default dataSlice.reducer;

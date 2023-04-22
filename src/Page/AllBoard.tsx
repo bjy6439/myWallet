@@ -1,27 +1,20 @@
 import { Box, Button, Container, Grid } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../Components/Card";
 import Navigation from "../Components/Navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../Store/store";
+import { getAllData } from "../Store/dataSlice";
 
-const DashBoard = () => {
-  const [xrpInfo, setXrpInfo] = useState([]);
+const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
+  const market = useSelector((state: RootState) => state.mydata.myData);
+  const dispatch = useAppDispatch();
+  console.log(market, "!!!");
 
   useEffect(() => {
-    const getApi = async () => {
-      const options = {
-        method: "GET",
-        headers: { accept: "application/json" },
-      };
-      await axios
-        .get("https://api.upbit.com/v1/market/all?isDetails=false", options)
-        .then((res: any) => {
-          setXrpInfo(res.data);
-        });
-    };
-    getApi();
+    dispatch(getAllData());
   }, []);
 
   return (
@@ -84,7 +77,7 @@ const DashBoard = () => {
                   }}
                 >
                   <Grid container spacing={2} justifyContent="center">
-                    {xrpInfo
+                    {market
                       .filter(({ market }: { market: string }) => {
                         return market.split("-")[0] === dataName;
                       })
@@ -106,7 +99,7 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default AllBoard;
 
 const Background = styled.div`
   width: 100vw;
@@ -119,6 +112,7 @@ const cardBox = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  padding: 5,
 };
 
 const BtnName = [
