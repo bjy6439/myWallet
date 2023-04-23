@@ -1,4 +1,4 @@
-import { Box, Card, Container, Grid } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -43,20 +43,28 @@ const Main = () => {
               <Box>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} md={10} lg={10}>
-                    1
-                    <Card />
+                    <Card>MAIN</Card>
+                  </Grid>
+                  <Grid item xs={12} sm={10} md={10} lg={10}>
+                    <Grid container>
+                      <Grid item xs={4} sm={4} md={4} lg={4}>
+                        <Typography variant="subtitle1">
+                          나의 관심 종목
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card />
+                    <Card>12</Card>
                   </Grid>
                   <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card />
+                    <Card>12</Card>
                   </Grid>
                   <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card />
+                    <Card>12</Card>
                   </Grid>
                   <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card />
+                    <Card>12</Card>
                   </Grid>
                 </Grid>
               </Box>
