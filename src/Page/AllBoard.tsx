@@ -3,19 +3,23 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../Components/Card";
 import Navigation from "../Components/Navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Store/store";
 import { getAllData } from "../Store/dataSlice";
+import { onModal } from "../Store/modalSlice";
+import CardModal from "../Components/CardModal";
 
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
   const market = useSelector((state: RootState) => state.mydata.myData);
   const dispatch = useAppDispatch();
-  console.log(market, "!!!");
+  const isModal = useSelector((state: RootState) => state.modal.modal);
 
   useEffect(() => {
     dispatch(getAllData());
   }, []);
+
+  console.log(isModal, "card");
 
   return (
     <Background>
@@ -83,9 +87,21 @@ const AllBoard = () => {
                       })
                       .map((item, idx) => {
                         return (
-                          <Grid key={idx} item xs={12} sm={12} md={6}>
-                            <Card item={item} />
-                          </Grid>
+                          <>
+                            <Grid
+                              key={idx}
+                              item
+                              xs={12}
+                              sm={12}
+                              md={6}
+                              onClick={(event) => {
+                                dispatch(onModal());
+                                event?.stopPropagation();
+                              }}
+                            >
+                              <Card item={item} />
+                            </Grid>
+                          </>
                         );
                       })}
                   </Grid>
@@ -95,6 +111,7 @@ const AllBoard = () => {
           </Grid>
         </Box>
       </Container>
+      {isModal && <CardModal />}
     </Background>
   );
 };

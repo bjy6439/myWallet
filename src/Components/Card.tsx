@@ -17,21 +17,23 @@ interface data {
 
 const Card = ({ item }: { item: data }) => {
   return (
-    <Container>
-      <Box sx={style}>
-        <Grid container p={2} padding={2}>
-          <Grid item xs={12} sm={12} md={12} mb={2} textAlign="center">
-            마켓 : {item.market}
+    <>
+      <Container>
+        <Box sx={style}>
+          <Grid container p={2} padding={2}>
+            <Grid item xs={12} sm={12} md={12} mb={2} textAlign="center">
+              마켓 : {item.market}
+            </Grid>
+            <Grid item xs={10} sm={10} md={10} m={1}>
+              한국명 : {item.korean_name}
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} m={1}>
+              영문명 : {item.english_name}
+            </Grid>
           </Grid>
-          <Grid item xs={10} sm={10} md={10} m={1}>
-            한국명 : {item.korean_name}
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} m={1}>
-            영문명 : {item.english_name}
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </>
   );
 };
 

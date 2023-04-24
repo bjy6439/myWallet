@@ -1,8 +1,9 @@
-import { Box, Button, Card, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
+import Graph from "../Components/Graph";
 
 const Main = () => {
   const [myCoin, setMycoin] = useState([]);
@@ -66,12 +67,14 @@ const Main = () => {
                   <Grid item xs={12} sm={5} md={5} lg={5}>
                     <Card>12</Card>
                   </Grid>
+                  <Graph />
                 </Grid>
               </Box>
             </Grid>
           </Grid>
         </Box>
       </Container>
+      <Graph />
     </Background>
   );
 };

@@ -1,6 +1,5 @@
 import { AnyAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AppDispatch } from "./store";
 
 export interface modalState {
   myData: any[];
@@ -38,5 +37,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const {} = dataSlice.actions;
+// export const {} = dataSlice.actions;
 export default dataSlice.reducer;
