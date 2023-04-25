@@ -1,44 +1,51 @@
+import { Grid } from "@mui/material";
 import axios from "axios";
-import { axisBottom, axisRight, scaleBand, scaleLinear, select } from "d3";
+import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from "d3";
 import React, { useEffect, useRef, useState } from "react";
 
-const Graph = () => {
+const Graph = ({ name }: { name: string }) => {
   const [data, setData] = useState([]);
   const svgRef = useRef(null);
 
-  console.log(data);
-
   const getData = () => {
     axios
-      .get(
-        "https://api.upbit.com/v1/candles/minutes/10?market=KRW-BTC&count=100"
-      )
+      .get(`https://api.upbit.com/v1/candles/minutes/10?market=${name}&count=6`)
       .then((res) => setData(res.data.reverse()));
   };
   useEffect(() => {
     getData();
   }, []);
 
-  // const chart = BarChart(data, {
-  //   x: (data: any) => data.candle_date_time_kst,
-  //   y: (data: any) => data.opening_price,
-  //   yFormat: "%",
-  //   yLabel: "↑ Frequency",
-  //   width: 0,
-  //   height: 500,
-  //   color: "steelblue",
-  //   duration: 750, // slow transition for demonstration
-  // });
+  console.log(name);
+
+  const svg = select("svg");
+
+  const chart = svg.append("g").attr("transform", `translate(${40}, ${0})`);
+  const yScale = scaleLinear().range([15, 250]).domain([6000, 100]);
+  chart.append("g").call(axisLeft(yScale));
+  const xScale = scaleBand()
+    .range([0, 250])
+    .domain(
+      data.map((s: any) => {
+        return s.candle_date_time_kst.slice(-8, -3);
+      })
+    )
+    .padding(0.2);
+
+  chart
+    .append("g")
+    .attr("transform", `translate(0, ${250})`)
+    .call(axisBottom(xScale));
 
   return (
     <>
-      {/* <svg
-        ref={svgRef}
-        style={{ padding: "10px", height: "100vh", width: "800vw" }}
-      >
-        <g className="x-axis" />
-        <g className="y-axis" />
-      </svg> */}
+      <div>제목</div>
+      <Grid sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+        <svg ref={svgRef} style={{ padding: "10px", height: "300px" }}>
+          <g className="x-axis" />
+          <g className="y-axis" />
+        </svg>
+      </Grid>
     </>
   );
 };

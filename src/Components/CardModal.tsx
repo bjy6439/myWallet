@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { closeModal } from "../Store/modalSlice";
 import { RootState, useAppDispatch } from "../Store/store";
+import Graph from "./Graph";
 
 const CardModal = () => {
   const isModal = useSelector((state: RootState) => state.modal.modal);
@@ -16,20 +17,14 @@ const CardModal = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid container>
-            <Grid item xs={10}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-            </Grid>
-            <Button
-              onClick={() => {
-                dispatch(closeModal());
-              }}
-            >
-              x
-            </Button>
-          </Grid>
+          <Grid container p={2} padding={2}></Grid>
+          <Button
+            onClick={() => {
+              dispatch(closeModal());
+            }}
+          >
+            x
+          </Button>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>

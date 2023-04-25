@@ -44,9 +44,6 @@ const Main = () => {
               <Box>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} md={10} lg={10}>
-                    <Card>MAIN</Card>
-                  </Grid>
-                  <Grid item xs={12} sm={10} md={10} lg={10}>
                     <Grid container>
                       <Grid item xs={4} sm={4} md={4} lg={4}>
                         <Typography variant="subtitle1">
@@ -55,26 +52,19 @@ const Main = () => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card>12</Card>
-                  </Grid>
-                  <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card>12</Card>
-                  </Grid>
-                  <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card>12</Card>
-                  </Grid>
-                  <Grid item xs={12} sm={5} md={5} lg={5}>
-                    <Card>12</Card>
-                  </Grid>
-                  <Graph />
+                  {DATA.map(({ name, id }: { name: string; id: number }) => {
+                    return (
+                      <Grid key={id} item xs={12} sm={5} md={5} lg={5}>
+                        <Graph name={name} />
+                      </Grid>
+                    );
+                  })}
                 </Grid>
               </Box>
             </Grid>
           </Grid>
         </Box>
       </Container>
-      <Graph />
     </Background>
   );
 };
@@ -93,3 +83,10 @@ const cardBox = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+const DATA = [
+  { name: "BTC-ETH", id: 1 },
+  { name: "BTC-XRP", id: 2 },
+  { name: "BTC-ETC", id: 3 },
+  { name: "BTC-OMG", id: 4 },
+];
