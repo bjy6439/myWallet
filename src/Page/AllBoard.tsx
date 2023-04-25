@@ -6,8 +6,6 @@ import Navigation from "../Components/Navigation";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Store/store";
 import { getAllData } from "../Store/dataSlice";
-import { onModal } from "../Store/modalSlice";
-import CardModal from "../Components/CardModal";
 
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
@@ -88,17 +86,7 @@ const AllBoard = () => {
                       .map((item, idx) => {
                         return (
                           <>
-                            <Grid
-                              key={idx}
-                              item
-                              xs={12}
-                              sm={12}
-                              md={6}
-                              onClick={(event) => {
-                                dispatch(onModal());
-                                event?.stopPropagation();
-                              }}
-                            >
+                            <Grid key={idx} item xs={12} sm={12} md={6}>
                               <Card item={item} />
                             </Grid>
                           </>
@@ -111,7 +99,6 @@ const AllBoard = () => {
           </Grid>
         </Box>
       </Container>
-      {isModal && <CardModal />}
     </Background>
   );
 };

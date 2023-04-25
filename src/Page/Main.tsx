@@ -1,9 +1,10 @@
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
+import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from "d3";
 
 const Main = () => {
   const [myCoin, setMycoin] = useState([]);
@@ -45,20 +46,28 @@ const Main = () => {
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} md={10} lg={10}>
                     <Grid container>
-                      <Grid item xs={4} sm={4} md={4} lg={4}>
+                      <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Graph />
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Typography variant="subtitle1">
                           나의 관심 종목
                         </Typography>
                       </Grid>
+                      <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Card>12</Card>
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Card>12</Card>
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Card>12</Card>
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Card>12</Card>
+                      </Grid>
                     </Grid>
                   </Grid>
-                  {DATA.map(({ name, id }: { name: string; id: number }) => {
-                    return (
-                      <Grid key={id} item xs={12} sm={5} md={5} lg={5}>
-                        <Graph name={name} />
-                      </Grid>
-                    );
-                  })}
                 </Grid>
               </Box>
             </Grid>
