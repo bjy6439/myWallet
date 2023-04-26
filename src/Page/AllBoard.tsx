@@ -10,8 +10,8 @@ import { getAllData } from "../Store/dataSlice";
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
   const market = useSelector((state: RootState) => state.mydata.myData);
-  const dispatch = useAppDispatch();
   const isModal = useSelector((state: RootState) => state.modal.modal);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllData());

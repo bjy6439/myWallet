@@ -13,9 +13,9 @@ const initialState: modalState = {
 
 export const getAllData = createAsyncThunk(
   "dataSlice,getAllData", // 타입
-  async () => {
+  async (title: string = "all") => {
     const resp = await axios.get(
-      "https://api.upbit.com/v1/market/all?isDetails=false",
+      `https://api.upbit.com/v1/market/${title}?isDetails=false`,
       {
         headers: { accept: "application/json" },
       }

@@ -1,31 +1,21 @@
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
-import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from "d3";
+import { RootState, useAppDispatch } from "../Store/store";
+import { getDetailData } from "../Store/detailDataSlice";
+import { useSelector } from "react-redux";
 
 const Main = () => {
-  const [myCoin, setMycoin] = useState([]);
-  const getApi = async () => {
-    const options = {
-      method: "GET",
-      headers: { accept: "application/json" },
-    };
-    await axios
-      .get(
-        "https://api.upbit.com/v1/candles/minutes/10?market=KRW-BTC&count=60",
-        options
-      )
-      .then((res: any) => {
-        setMycoin(res.data);
-      });
-  };
+  const dispatch = useAppDispatch();
+  const myAlldata = useSelector(
+    (state: RootState) => state.myAlldata.myAllData
+  );
 
   useEffect(() => {
-    getApi();
-  });
+    dispatch(getDetailData("BTC-CVC"));
+  }, []);
 
   return (
     <Background>
@@ -54,18 +44,32 @@ const Main = () => {
                           나의 관심 종목
                         </Typography>
                       </Grid>
-                      <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <Card>12</Card>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <Card>12</Card>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <Card>12</Card>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <Card>12</Card>
-                      </Grid>
+                      {myAlldata.map((data: any) => {
+                        return (
+                          <Grid
+                            item
+                            xs={5}
+                            sm={5}
+                            md={5}
+                            lg={5}
+                            sx={{ cursor: "pointer", margin: 1 }}
+                            onClick={() => {
+                              dispatch(getDetailData(data));
+                            }}
+                          >
+                            {" "}
+                            <Box
+                              sx={{
+                                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                                borderRadius: 5,
+                                padding: 1,
+                              }}
+                            >
+                              <div>{data}</div>
+                            </Box>
+                          </Grid>
+                        );
+                      })}
                     </Grid>
                   </Grid>
                 </Grid>
