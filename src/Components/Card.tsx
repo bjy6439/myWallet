@@ -2,6 +2,7 @@ import { Box, Button, Container, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { addMyData } from "../Store/myDataSlice";
 import { RootState, useAppDispatch } from "../Store/store";
+import { AiOutlineStar, AiFillStar, AiOutlinePlus } from "react-icons/ai";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -19,8 +20,9 @@ const Card = ({ item }: { item: data }) => {
   const myAllData = useSelector((state: RootState) => {
     return state.myAlldata.myAllData;
   });
+  const kName = item.korean_name;
+  const eName = item.english_name;
 
-  console.log(myAllData);
   return (
     <>
       <Container>
@@ -35,14 +37,14 @@ const Card = ({ item }: { item: data }) => {
                   dispatch(addMyData(item.market));
                 }}
               >
-                별
+                <AiOutlinePlus />
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>
-              한국명 : {item.korean_name}
+              한국명 : {kName}
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>
-              영문명 : {item.english_name}
+              영문명 : {eName}
             </Grid>
           </Grid>
         </Box>

@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from "d3";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -39,14 +39,16 @@ const Graph = () => {
   return (
     <>
       <Grid sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-        <Typography padding={3}>제목</Typography>
-        <svg
-          ref={svgRef}
-          style={{ padding: "10px", height: "300px", width: "500px" }}
-        >
-          <g className="x-axis" />
-          <g className="y-axis" />
-        </svg>
+        <Typography padding={3}>{detailData[0]?.market}</Typography>
+        <Grid>
+          <svg
+            ref={svgRef}
+            style={{ padding: "10px", height: "300px", width: "500px" }}
+          >
+            <g className="x-axis" />
+            <g className="y-axis" />
+          </svg>
+        </Grid>
       </Grid>
     </>
   );

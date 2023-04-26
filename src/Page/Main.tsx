@@ -1,4 +1,4 @@
-import { Box, Card, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
@@ -6,6 +6,7 @@ import Graph from "../Components/Graph";
 import { RootState, useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import { useSelector } from "react-redux";
+import { addMyData } from "../Store/myDataSlice";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -35,11 +36,11 @@ const Main = () => {
               <Box>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} md={10} lg={10}>
-                    <Grid container>
-                      <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Grid container justifyContent="center">
+                      <Grid item xs={12} sm={12} md={12} lg={8} m={2}>
                         <Graph />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12}>
+                      <Grid item xs={12} sm={10} md={12} lg={12}>
                         <Typography variant="subtitle1">
                           나의 관심 종목
                         </Typography>
@@ -53,11 +54,11 @@ const Main = () => {
                             md={5}
                             lg={5}
                             sx={{ cursor: "pointer", margin: 1 }}
-                            onClick={() => {
+                            onClick={(e) => {
                               dispatch(getDetailData(data));
+                              e.stopPropagation();
                             }}
                           >
-                            {" "}
                             <Box
                               sx={{
                                 boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -65,7 +66,20 @@ const Main = () => {
                                 padding: 1,
                               }}
                             >
-                              <div>{data}</div>
+                              <Grid container alignItems="center">
+                                <Grid item xs={9} sm={9} md={9} lg={9}>
+                                  <Typography p={2}>{data}</Typography>
+                                </Grid>
+                                <Grid item xs={2} sm={2} md={2} lg={2}>
+                                  <Button
+                                    onClick={() => {
+                                      dispatch(addMyData(data));
+                                    }}
+                                  >
+                                    del
+                                  </Button>
+                                </Grid>
+                              </Grid>
                             </Box>
                           </Grid>
                         );
