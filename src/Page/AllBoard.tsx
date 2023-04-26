@@ -115,7 +115,6 @@ const Background = styled.div`
 const cardBox = {
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
   padding: 5,
 };
 

@@ -13,11 +13,7 @@ const Navigation = () => {
 
   return (
     <Container>
-      <Box
-        sx={{
-          bgcolor: "#f8fafb",
-        }}
-      >
+      <Box>
         <Grid container>
           <Grid item xs={12}>
             <Button

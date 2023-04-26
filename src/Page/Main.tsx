@@ -45,45 +45,59 @@ const Main = () => {
                           나의 관심 종목
                         </Typography>
                       </Grid>
-                      {myAlldata.map((data: any) => {
-                        return (
-                          <Grid
-                            item
-                            xs={5}
-                            sm={5}
-                            md={5}
-                            lg={5}
-                            sx={{ cursor: "pointer", margin: 1 }}
-                            onClick={(e) => {
-                              dispatch(getDetailData(data));
-                              e.stopPropagation();
-                            }}
-                          >
-                            <Box
+                      <Grid
+                        container
+                        sx={{
+                          height: "200px",
+                          overflowY: "scroll",
+                        }}
+                        m={2}
+                      >
+                        {myAlldata.map((data: any) => {
+                          return (
+                            <Grid
+                              item
+                              xs={5}
+                              sm={5}
+                              md={5}
+                              lg={5}
                               sx={{
-                                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                borderRadius: 5,
-                                padding: 1,
+                                cursor: "pointer",
+                                margin: 1,
+                              }}
+                              onClick={(e) => {
+                                dispatch(getDetailData(data));
+                                e.stopPropagation();
                               }}
                             >
-                              <Grid container alignItems="center">
-                                <Grid item xs={9} sm={9} md={9} lg={9}>
-                                  <Typography p={2}>{data}</Typography>
+                              <Box
+                                sx={{
+                                  boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                                  borderRadius: 5,
+                                  padding: 1,
+                                }}
+                              >
+                                <Grid container alignItems="center">
+                                  <Grid item xs={9} sm={9} md={9} lg={9}>
+                                    <Typography variant="body2" p={2}>
+                                      {data}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={2} sm={2} md={2} lg={2}>
+                                    <Button
+                                      onClick={() => {
+                                        dispatch(addMyData(data));
+                                      }}
+                                    >
+                                      del
+                                    </Button>
+                                  </Grid>
                                 </Grid>
-                                <Grid item xs={2} sm={2} md={2} lg={2}>
-                                  <Button
-                                    onClick={() => {
-                                      dispatch(addMyData(data));
-                                    }}
-                                  >
-                                    del
-                                  </Button>
-                                </Grid>
-                              </Grid>
-                            </Box>
-                          </Grid>
-                        );
-                      })}
+                              </Box>
+                            </Grid>
+                          );
+                        })}
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -108,12 +122,4 @@ const Background = styled.div`
 const cardBox = {
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
 };
-
-const DATA = [
-  { name: "BTC-ETH", id: 1 },
-  { name: "BTC-XRP", id: 2 },
-  { name: "BTC-ETC", id: 3 },
-  { name: "BTC-OMG", id: 4 },
-];
