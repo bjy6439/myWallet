@@ -13,7 +13,15 @@ export const myDataSlice = createSlice({
   initialState,
   reducers: {
     addMyData: (state, action) => {
-      state.myAllData.push(action.payload);
+      const existingIndex = state.myAllData.findIndex(
+        (item) => item === action.payload
+      );
+
+      if (existingIndex >= 0) {
+        state.myAllData.splice(existingIndex, 1);
+      } else {
+        state.myAllData.push(action.payload);
+      }
     },
   },
 });
