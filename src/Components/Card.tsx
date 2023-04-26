@@ -1,12 +1,12 @@
 import { Box, Button, Container, Grid } from "@mui/material";
-import { useSelector } from "react-redux";
 import { addMyData } from "../Store/myDataSlice";
-import { RootState, useAppDispatch } from "../Store/store";
-import { AiOutlineStar, AiFillStar, AiOutlinePlus } from "react-icons/ai";
+import { useAppDispatch } from "../Store/store";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
   borderRadius: 5,
+  backgroundColor: "#effcf1",
 };
 
 interface data {
@@ -17,9 +17,6 @@ interface data {
 
 const Card = ({ item }: { item: data }) => {
   const dispatch = useAppDispatch();
-  const myAllData = useSelector((state: RootState) => {
-    return state.myAlldata.myAllData;
-  });
   const kName = item.korean_name;
   const eName = item.english_name;
 

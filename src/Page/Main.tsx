@@ -1,4 +1,4 @@
-import { Box, Button, Card, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navigation from "../Components/Navigation";
@@ -7,6 +7,7 @@ import { RootState, useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import { useSelector } from "react-redux";
 import { addMyData } from "../Store/myDataSlice";
+import MainCard from "../Components/MainCard";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -61,39 +62,12 @@ const Main = () => {
                               sm={5}
                               md={5}
                               lg={5}
-                              sx={{
-                                cursor: "pointer",
-                                margin: 1,
-                              }}
-                              onClick={(e) => {
+                              m={2}
+                              onClick={() => {
                                 dispatch(getDetailData(data));
-                                e.stopPropagation();
                               }}
                             >
-                              <Box
-                                sx={{
-                                  boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                  borderRadius: 5,
-                                  padding: 1,
-                                }}
-                              >
-                                <Grid container alignItems="center">
-                                  <Grid item xs={9} sm={9} md={9} lg={9}>
-                                    <Typography variant="body2" p={2}>
-                                      {data}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item xs={2} sm={2} md={2} lg={2}>
-                                    <Button
-                                      onClick={() => {
-                                        dispatch(addMyData(data));
-                                      }}
-                                    >
-                                      del
-                                    </Button>
-                                  </Grid>
-                                </Grid>
-                              </Box>
+                              <MainCard data={data} />
                             </Grid>
                           );
                         })}
@@ -113,6 +87,7 @@ const Main = () => {
 export default Main;
 
 const Background = styled.div`
+  background-color: #ece8e7;
   width: 100vw;
   height: 100vh;
   display: flex;

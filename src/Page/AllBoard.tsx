@@ -41,20 +41,12 @@ const AllBoard = () => {
                     height: 100,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-around",
                   }}
                 >
                   {BtnName.map(({ id, name }) => {
                     return (
-                      <Grid
-                        item
-                        key={id}
-                        xs={4}
-                        sm={4}
-                        md={4}
-                        lg={4}
-                        textAlign="center"
-                      >
+                      <Grid item key={id} textAlign="center">
                         <Button
                           onClick={() => {
                             setDataName(name);
@@ -112,11 +104,11 @@ const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ece8e7;
 `;
 const cardBox = {
   display: "flex",
   justifyContent: "center",
-  padding: 5,
 };
 
 const BtnName = [
