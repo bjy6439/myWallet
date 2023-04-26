@@ -83,10 +83,11 @@ const AllBoard = () => {
                       .filter(({ market }: { market: string }) => {
                         return market.split("-")[0] === dataName;
                       })
-                      .map((item, idx) => {
+                      .map((item) => {
+                        console.log(item);
                         return (
                           <>
-                            <Grid key={idx} item xs={12} sm={12} md={6}>
+                            <Grid key={item.market} item xs={12} sm={12} md={6}>
                               <Card item={item} />
                             </Grid>
                           </>

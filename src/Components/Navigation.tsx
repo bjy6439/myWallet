@@ -76,5 +76,4 @@ export default Navigation;
 const BUTTONLIST = [
   { id: 1, name: "대시보드" },
   { id: 2, name: "모든 거래" },
-  { id: 3, name: "나의 거래" },
 ];

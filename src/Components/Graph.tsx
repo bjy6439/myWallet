@@ -11,8 +11,10 @@ const Graph = () => {
   const svgRef = useRef(null);
 
   const makeGraph = () => {
-    const svg = select("svg");
-    const chart = svg.append(`g`).attr("transform", `translate(${100}, ${0})`);
+    const svg = select("svg")
+      .call((g) => g.select("svg").remove())
+      .append("svg");
+    const chart = svg.append(`g`).attr("transform", `translate(${100}, ${10})`);
     const opPrice = detailData[1]?.opening_price * 100000000;
     const yScale = scaleLinear()
       .range([0, 250])
