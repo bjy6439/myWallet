@@ -2,7 +2,7 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "./AlertModal";
 import { useSelector } from "react-redux";
-import { onModal } from "../Store/modalSlice";
+import { closeModal, onModal } from "../Store/modalSlice";
 import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
 
@@ -40,6 +40,9 @@ const Navigation = () => {
                           navigate("/all");
                         } else {
                           dispatch(onModal());
+                          setTimeout(() => {
+                            dispatch(closeModal());
+                          }, 1500);
                         }
                       }}
                     >
@@ -76,4 +79,5 @@ export default Navigation;
 const BUTTONLIST = [
   { id: 1, name: "대시보드" },
   { id: 2, name: "모든 거래" },
+  { id: 3, name: "나의 거래" },
 ];
