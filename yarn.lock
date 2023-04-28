@@ -4294,6 +4294,13 @@
   dependencies:
     "d3-color" "1 - 3"
 
+"d3-line-chart@^0.1.2":
+  "integrity" "sha512-UZcK/RYQd0uG8+zXm7R0rT5lr31u7fY0YqoBw6rhimkjXKkmYO+FYgSd1LoUFpYw0LGehvSATjtV2Vsq52NMOQ=="
+  "resolved" "https://registry.npmjs.org/d3-line-chart/-/d3-line-chart-0.1.2.tgz"
+  "version" "0.1.2"
+  dependencies:
+    "d3" "*"
+
 "d3-path@^3.1.0", "d3-path@1 - 3", "d3-path@3":
   "integrity" "sha512-p3KP5HCf/bvjBSSKuXid6Zqijx7wIfNW+J/maPs+iwR35at5JCbLUT0LzF1cnjbCHWhqzQTIN2Jpe8pRebIEFQ=="
   "resolved" "https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz"
@@ -4386,7 +4393,7 @@
     "d3-selection" "2 - 3"
     "d3-transition" "2 - 3"
 
-"d3@^7.8.4":
+"d3@*", "d3@^7.8.4":
   "integrity" "sha512-q2WHStdhiBtD8DMmhDPyJmXUxr6VWRngKyiJ5EfXMxPw+tqT6BhNjhJZ4w3BHsNm3QoVfZLY8Orq/qPFczwKRA=="
   "resolved" "https://registry.npmjs.org/d3/-/d3-7.8.4.tgz"
   "version" "7.8.4"

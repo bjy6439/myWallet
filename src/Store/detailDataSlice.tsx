@@ -13,7 +13,7 @@ export const getDetailData = createAsyncThunk(
   "detailDataSlice,getDetailData", // 타입
   async (title: string = "KRW-BTC") => {
     const resp = await axios.get(
-      `https://api.upbit.com/v1/candles/minutes/10?market=${title}&count=6`,
+      `https://api.upbit.com/v1/candles/days?market=${title}&count=3&convertingPriceUnit=KRW`,
       {
         headers: { accept: "application/json" },
       }
