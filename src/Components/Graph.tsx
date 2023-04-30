@@ -1,65 +1,70 @@
 import { Grid, Typography } from "@mui/material";
-import { axisBottom, axisLeft, scaleBand, scaleLinear, select } from "d3";
-import { useEffect, useRef } from "react";
+import { axisBottom, axisLeft, max, scaleBand, scaleLinear } from "d3";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../Store/store";
+import { select } from "d3-selection";
 
 const Graph = () => {
+  const svg = select("svg")
+    .call((g) => g.select("svg").remove())
+    .append("svg");
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
   });
-  const svgRef = useRef(null);
+  const ref = useRef<SVGSVGElement | null>(null);
+  const [selection, setSelection] = useState<any>(null);
 
-  const barsData = detailData?.map((item: any, index: number) => ({
-    date: item.candle_date_time_kst.slice(-13, -9) + "일",
-    value: item.converted_trade_price,
-    id: index,
-  }));
+  console.log(detailData);
 
-  const opPrice = detailData.map((item: any) => {
-    return item.converted_trade_price;
-  });
-  const maxOpPrice = Math.ceil(Math.max(...opPrice));
-  const minOpPrice = Math.floor(Math.min(...opPrice));
+  const maxValue: any = max(detailData, (d: any) =>
+    Math.ceil(d.converted_trade_price)
+  );
+  const date = detailData.map((d: any) =>
+    d.candle_date_time_kst.slice(-13, -9)
+  );
+  console.log(date);
 
-  const makeGraph = () => {
-    const svg = select("svg")
-      .call((g) => g.select("svg").remove())
-      .append("svg");
-    const chart = svg.append(`g`).attr("transform", `translate(${100}, ${0})`);
-    const yScale = scaleLinear()
-      .range([0, 250])
-      .domain([maxOpPrice, minOpPrice]);
-    chart.append(`g`).call(axisLeft(yScale));
-    const xScale = scaleBand()
-      .range([0, 300])
-      .domain(
-        barsData.map(({ date }: { date: string }) => {
-          return date;
-        })
-      )
-      .padding(0.2);
-
-    console.log(barsData);
-
-    chart
-      .append(`g`)
-      .attr("transform", `translate(0, 250)`)
-      .call(axisBottom(xScale))
-      .data(barsData)
-      .append("rect")
-      .attr("fill", "steelblue")
-      .attr("height", (d: any) => maxOpPrice - d.value)
-      .attr("width", 30)
-      .attr("x", (d: any) => d.id + 1 * 40)
-      .attr("y", 0)
-      .attr("opacity", 0.7);
-  };
+  const y = scaleLinear().domain([0, maxValue!]).range([300, 0]);
+  const x = scaleBand().domain(date).range([0, 300]).padding(0.2);
+  const yAxis = axisLeft(y)
+    .ticks(10)
+    .tickFormat((d) => `${d}₩`);
+  const xAxis = axisBottom(x);
 
   useEffect(() => {
-    makeGraph();
-  }, [detailData]);
+    if (!selection) {
+      setSelection(select(ref.current));
+    } else {
+      const xAxisGroup = svg
+        .append("g")
+        .attr("transform", `translate(100,300)`)
+        .call(xAxis);
+      const yAxisGroup = svg
+        .append("g")
+        .attr("transform", `translate(100,0)`)
+        .call(yAxis);
 
+      svg
+        .append("rect")
+        .attr("wdith", 500)
+        .attr("height", 500)
+        .attr("fill", "yellow");
+
+      svg
+        .append("g")
+        .attr("transform", `translate(100,0)`)
+        .selectAll("rect")
+        .data(detailData)
+        .enter()
+        .append("rect")
+        .attr("width", 30)
+        .attr("height", (d: any) => 300 - y(d.converted_trade_price))
+        .attr("x", (d: any) => x(d.candle_date_time_kst.slice(-13, -9))!)
+        .attr("y", (d: any) => y(d.converted_trade_price))
+        .attr("fill", "orange");
+    }
+  }, [detailData]);
   return (
     <>
       <Grid
@@ -67,19 +72,17 @@ const Graph = () => {
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           backgroundColor: "#f5f6ff",
         }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
       >
         <Typography padding={3}>{detailData[0]?.market}</Typography>
         <Grid>
-          <svg
-            ref={svgRef}
-            style={{
-              padding: "10px",
-              height: "300px",
-              width: "500px",
-            }}
-          >
-            <g className="x-axis" />
-            <g className="y-axis" />
+          <svg ref={ref} width={500} height={350}>
+            <g>
+              <rect></rect>
+            </g>
           </svg>
         </Grid>
       </Grid>
