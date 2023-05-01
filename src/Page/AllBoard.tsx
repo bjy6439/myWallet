@@ -17,8 +17,6 @@ const AllBoard = () => {
     dispatch(getAllData());
   }, []);
 
-  console.log(isModal, "card");
-
   return (
     <Background>
       <Container>
@@ -30,10 +28,10 @@ const AllBoard = () => {
           }}
         >
           <Grid container sx={cardBox}>
-            <Grid item xs={12} sm={12} md={5} lg={3}>
+            <Grid item xs={12} sm={12} md={3} lg={3}>
               <Navigation />
             </Grid>
-            <Grid item xs={12} sm={12} md={7} lg={9}>
+            <Grid item xs={12} sm={12} md={9} lg={9}>
               <Grid item xs={12} sm={12} md={12} lg={12}>
                 <Grid
                   container
@@ -76,11 +74,10 @@ const AllBoard = () => {
                         return market.split("-")[0] === dataName;
                       })
                       .map((item) => {
-                        console.log(item);
                         return (
                           <>
-                            <Grid key={item.market} item xs={12} sm={12} md={6}>
-                              <Card item={item} />
+                            <Grid item xs={12} sm={12} md={6}>
+                              <Card item={item} key={item.market} />
                             </Grid>
                           </>
                         );

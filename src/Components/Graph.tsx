@@ -12,7 +12,6 @@ const Graph = () => {
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
   });
-  console.log(detailData);
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 

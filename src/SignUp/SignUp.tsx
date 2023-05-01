@@ -8,9 +8,13 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AlertModal from "../Components/AlertModal";
+import { closeModal, onModal } from "../Store/modalSlice";
+import { useAppDispatch } from "../Store/store";
 
 const SignUp = () => {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <Background>
@@ -72,7 +76,17 @@ const SignUp = () => {
                     );
                   })}
                   <Grid item xs={12} sm={12} md={12}>
-                    <Button variant="text">회원가입</Button>
+                    <Button
+                      variant="text"
+                      onClick={() => {
+                        dispatch(onModal());
+                        setTimeout(() => {
+                          dispatch(closeModal());
+                        }, 1500);
+                      }}
+                    >
+                      회원가입
+                    </Button>
                   </Grid>
                 </Grid>
               </Box>
@@ -80,6 +94,7 @@ const SignUp = () => {
           </Grid>
         </Box>
       </Container>
+      <AlertModal />
     </Background>
   );
 };
