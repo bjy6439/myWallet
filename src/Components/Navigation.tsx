@@ -57,6 +57,7 @@ const Navigation = () => {
                   onClick={() => {
                     if (isLogin) {
                       dispatch(logout());
+                      localStorage.removeItem("token");
                     } else {
                       navigate("/login");
                     }
