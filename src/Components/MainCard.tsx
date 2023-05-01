@@ -9,7 +9,7 @@ const MainCard = ({ data }: { data: any }) => {
   return (
     <Box sx={btnColor}>
       <Grid container alignItems="center">
-        <Grid item xs={9} sm={9} md={9} lg={9}>
+        <Grid item xs={8} sm={8} md={8} lg={8}>
           <Typography variant="body2" p={2}>
             {data}
           </Typography>

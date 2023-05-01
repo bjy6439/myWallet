@@ -58,11 +58,11 @@ const Main = () => {
                           return (
                             <Grid
                               item
-                              xs={5}
+                              xs={12}
                               sm={5}
                               md={5}
                               lg={5}
-                              m={2}
+                              m={1}
                               onClick={() => {
                                 dispatch(getDetailData(data));
                               }}

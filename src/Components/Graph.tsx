@@ -12,18 +12,16 @@ const Graph = () => {
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
   });
+  console.log(detailData);
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 
-  console.log(detailData);
-
-  const maxValue: any = max(detailData, (d: any) =>
-    Math.ceil(d.converted_trade_price)
-  );
+  const maxValue: any = max(detailData, (d: any) => {
+    return Math.ceil(d.converted_trade_price);
+  });
   const date = detailData.map((d: any) =>
     d.candle_date_time_kst.slice(-13, -9)
   );
-  console.log(date);
 
   const y = scaleLinear().domain([0, maxValue!]).range([300, 0]);
   const x = scaleBand().domain(date).range([0, 300]).padding(0.2);
@@ -65,6 +63,7 @@ const Graph = () => {
         .attr("fill", "orange");
     }
   }, [detailData]);
+
   return (
     <>
       <Grid
