@@ -16,7 +16,7 @@ const Main = () => {
   );
 
   useEffect(() => {
-    dispatch(getDetailData("BTC-CVC"));
+    dispatch(getDetailData());
   }, []);
 
   return (

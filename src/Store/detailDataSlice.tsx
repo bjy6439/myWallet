@@ -10,8 +10,8 @@ const initialState: modalState = {
 };
 
 export const getDetailData = createAsyncThunk(
-  "detailDataSlice,getDetailData", // 타입
-  async (title: string = "KRW-BTC") => {
+  "detailDataSlice,getDetailData",
+  async (title: string = "BTC-CVC") => {
     const resp = await axios.get(
       `https://api.upbit.com/v1/candles/days?market=${title}&count=6&convertingPriceUnit=KRW`,
       {
