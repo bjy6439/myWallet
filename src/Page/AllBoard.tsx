@@ -18,91 +18,82 @@ const AllBoard = () => {
   }, []);
 
   return (
-    <Background>
-      <Container>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            boxShadow: 5,
-            borderRadius: 2,
-          }}
-        >
-          <Grid container sx={cardBox}>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
-              <Navigation />
+    <Container>
+      <Box
+        sx={{
+          bgcolor: "background.paper",
+          boxShadow: 5,
+          borderRadius: 2,
+          marginTop: 2,
+        }}
+      >
+        <Grid container sx={cardBox}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
+            <Navigation />
+          </Grid>
+          <Grid item xs={12} sm={12} md={9} lg={9}>
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Grid
+                container
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  height: "10vh",
+                }}
+              >
+                {BtnName.map(({ id, name }) => {
+                  return (
+                    <Grid item key={id} textAlign="center">
+                      <Button
+                        onClick={() => {
+                          setDataName(name);
+                        }}
+                      >
+                        {name}
+                      </Button>
+                    </Grid>
+                  );
+                })}
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={9} lg={9}>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <Grid
-                  container
-                  sx={{
-                    height: 100,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  {BtnName.map(({ id, name }) => {
-                    return (
-                      <Grid item key={id} textAlign="center">
-                        <Button
-                          onClick={() => {
-                            setDataName(name);
-                          }}
-                        >
-                          {name}
-                        </Button>
-                      </Grid>
-                    );
-                  })}
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Box
+                sx={{
+                  overflow: "scroll",
+                  padding: 4,
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "80vh",
+                  "&::-webkit-scrollbar": { display: "none" },
+                }}
+              >
+                <Grid container spacing={2} justifyContent="center">
+                  {market
+                    .filter(({ market }: { market: string }) => {
+                      return market.split("-")[0] === dataName;
+                    })
+                    .map((item) => {
+                      return (
+                        <>
+                          <Grid item xs={12} sm={12} md={6}>
+                            <Card item={item} key={item.market} />
+                          </Grid>
+                        </>
+                      );
+                    })}
                 </Grid>
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <Box
-                  sx={{
-                    height: 600,
-                    overflow: "scroll",
-                    padding: 4,
-                    display: "flex",
-                    justifyContent: "center",
-                    "&::-webkit-scrollbar": { display: "none" },
-                  }}
-                >
-                  <Grid container spacing={2} justifyContent="center">
-                    {market
-                      .filter(({ market }: { market: string }) => {
-                        return market.split("-")[0] === dataName;
-                      })
-                      .map((item) => {
-                        return (
-                          <>
-                            <Grid item xs={12} sm={12} md={6}>
-                              <Card item={item} key={item.market} />
-                            </Grid>
-                          </>
-                        );
-                      })}
-                  </Grid>
-                </Box>
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
-        </Box>
-      </Container>
-    </Background>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
 export default AllBoard;
 
-const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ece8e7;
-`;
 const cardBox = {
   display: "flex",
   justifyContent: "center",
