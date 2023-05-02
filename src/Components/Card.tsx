@@ -1,8 +1,8 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
-import { RootState, useAppDispatch } from "../Store/store";
-import { AiOutlinePlus } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useAppDispatch } from "../Store/store";
+import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
+import { useState } from "react";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -20,6 +20,7 @@ const Card = ({ item }: { item: data }) => {
   const dispatch = useAppDispatch();
   const kName = item.korean_name;
   const eName = item.english_name;
+  const [selectList, setSelectList] = useState(false);
 
   return (
     <>
@@ -33,9 +34,10 @@ const Card = ({ item }: { item: data }) => {
               <Button
                 onClick={() => {
                   dispatch(addMyData(item.market));
+                  setSelectList(!selectList);
                 }}
               >
-                <AiOutlinePlus />
+                {selectList ? <AiOutlineDelete /> : <AiOutlinePlus />}
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>

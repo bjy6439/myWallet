@@ -48,11 +48,13 @@ const Graph = () => {
     if (!selection) {
       setSelection(select(ref.current));
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const xAxisGroup = svg
         .append("g")
         .attr("transform", `translate(100,300)`)
 
         .call(xAxis);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const yAxisGroup = svg
         .append("g")
         .attr("transform", `translate(100,0)`)
@@ -86,32 +88,38 @@ const Graph = () => {
           (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 40
         )
         .attr("cy", (d: any) => yScale(d.opening_price))
-        .attr("fill", "orange");
+        .attr("fill", "#6365dd");
 
       svg
         .append("path")
         .datum(detailData)
         .attr("fill", "none")
-        .attr("stroke", "orange")
+        .attr("stroke", "#6365dd")
         .attr("stroke-width", 2)
         .attr("d", lineGenerator(detailData));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailData]);
 
   return (
     <>
       <Grid
+        container
         sx={{
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           backgroundColor: "#f5f6ff",
+          overflow: "scroll",
+          "&::-webkit-scrollbar": { display: "none" },
         }}
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
       >
-        <Typography padding={3}>{detailData[0]?.market}</Typography>
-        <Grid>
+        <Grid item>
+          <Typography padding={3}>{detailData[0]?.market}</Typography>
+        </Grid>
+        <Grid item>
           <GraphBox ref={ref}>
             <g>
               <rect></rect>

@@ -10,10 +10,6 @@ import styled from "styled-components";
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
   const market = useSelector((state: RootState) => state.mydata.myData);
-  const myAlldata = useSelector(
-    (state: RootState) => state.myAlldata.myAllData
-  );
-  console.log(myAlldata);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

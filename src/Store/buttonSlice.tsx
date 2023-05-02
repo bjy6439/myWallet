@@ -5,7 +5,7 @@ export interface modalState {
 }
 
 const initialState: modalState = {
-  button: "Dashboard",
+  button: "",
 };
 
 export const modalSlice = createSlice({

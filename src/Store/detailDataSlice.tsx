@@ -13,7 +13,7 @@ export const getDetailData = createAsyncThunk(
   "detailDataSlice,getDetailData",
   async (title: string = "USDT-ETH") => {
     const resp = await axios.get(
-      `https://api.upbit.com/v1/candles/days?market=${title}&count=6&convertingPriceUnit=KRW`,
+      `https://api.upbit.com/v1/candles/days?market=${title}&count=6`,
       {
         headers: { accept: "application/json" },
       }
