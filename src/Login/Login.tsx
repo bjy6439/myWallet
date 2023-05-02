@@ -40,15 +40,12 @@ const Login = () => {
           <Grid container alignItems="center" justifyContent="center">
             <Grid item xs={12} sm={12} md={8} lg={8} sx={display}>
               <Grid>
-                <Button
+                <LogoImg
                   onClick={() => {
                     nav("/");
                   }}
-                >
-                  <Typography variant="h4" p={3}>
-                    My Wallet
-                  </Typography>
-                </Button>
+                  src={"/images/logo.png"}
+                />
               </Grid>
               <Grid item sx={Formstyle} xs={12} sm={12} md={10}>
                 <Grid item sx={dpColumn}>
@@ -156,3 +153,9 @@ const dpColumn = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+const LogoImg = styled.img`
+  margin: 10px;
+  width: 100px;
+  cursor: pointer;
+`;

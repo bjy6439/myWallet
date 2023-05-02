@@ -48,15 +48,12 @@ const SignUp = () => {
                 }}
               >
                 <Grid>
-                  <Button
+                  <LogoImg
                     onClick={() => {
                       nav("/");
                     }}
-                  >
-                    <Typography variant="h4" p={3}>
-                      My Wallet
-                    </Typography>
-                  </Button>
+                    src={"/images/logo.png"}
+                  />
                 </Grid>
                 <Grid container padding={2} sx={Formstyle}>
                   <Typography variant="h4" marginY={2}>
@@ -130,3 +127,9 @@ const SIGNUPINPUTS = [
   { id: 4, type: "password", label: "PW 확인" },
   { id: 5, type: "tel", label: "휴대폰 번호" },
 ];
+
+const LogoImg = styled.img`
+  margin: 10px;
+  width: 100px;
+  cursor: pointer;
+`;

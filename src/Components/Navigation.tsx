@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { closeModal, onModal } from "../Store/modalSlice";
 import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
-import { useState } from "react";
 import styled from "styled-components";
 import { setButton } from "../Store/buttonSlice";
 
