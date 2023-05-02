@@ -68,7 +68,7 @@ const Navigation = () => {
                     }
                   }}
                 >
-                  {isLogin ? "logout" : "login"}
+                  {isLogin ? "Logout" : "Login"}
                 </NavBtn>
               </Grid>
             </Grid>

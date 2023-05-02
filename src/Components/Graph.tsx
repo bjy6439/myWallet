@@ -61,7 +61,7 @@ const Graph = () => {
         .call(yAxis);
 
       const lineGenerator = line()
-        .x((d: any, i: number) => xScale(date[i])! + 140)
+        .x((d: any, i: number) => xScale(date[i])! + 125)
         .y((d: any) => yScale(d.opening_price))
         .curve(curveCardinal);
 
@@ -85,7 +85,7 @@ const Graph = () => {
         .attr("height", (d: any) => 300 - yScale(d.opening_price))
         .attr(
           "cx",
-          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 40
+          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
         )
         .attr("cy", (d: any) => yScale(d.opening_price))
         .attr("fill", "#6365dd");
