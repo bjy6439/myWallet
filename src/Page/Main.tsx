@@ -16,8 +16,11 @@ const Main = () => {
     return data ? JSON.parse(data) : [];
   });
 
+  const storedData = localStorage.getItem("data");
+  const ccc: string | null = storedData ? JSON.parse(storedData)[0] : null;
+
   useEffect(() => {
-    dispatch(getDetailData());
+    dispatch(getDetailData(`${ccc}`));
   }, []);
 
   return (

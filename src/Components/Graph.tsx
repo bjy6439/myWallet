@@ -23,6 +23,11 @@ const Graph = () => {
     return state.detailData.dataInfo;
   });
 
+  const storedData = localStorage.getItem("data");
+  const ccc: string | null = storedData ? JSON.parse(storedData)[0] : null;
+
+  console.log(ccc);
+
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 

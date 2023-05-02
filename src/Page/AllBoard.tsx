@@ -8,7 +8,6 @@ import { getAllData } from "../Store/dataSlice";
 import styled from "styled-components";
 
 const AllBoard = () => {
-  const [dataName, setDataName] = useState("BTC");
   const market = useSelector((state: RootState) => state.mydata.myData);
   const dispatch = useAppDispatch();
 
@@ -45,9 +44,10 @@ const AllBoard = () => {
                   return (
                     <Grid item key={id} textAlign="center">
                       <NavBtn
-                        primery={dataName === name}
+                        primery={localStorage.getItem("category") === name}
                         onClick={() => {
-                          setDataName(name);
+                          localStorage.setItem("category", name);
+                          window.location.reload();
                         }}
                       >
                         {name}
@@ -71,7 +71,10 @@ const AllBoard = () => {
                 <Grid container spacing={2} justifyContent="center">
                   {market
                     .filter(({ market }: { market: string }) => {
-                      return market.split("-")[0] === dataName;
+                      return (
+                        market.split("-")[0] ===
+                        localStorage.getItem("category")
+                      );
                     })
                     .map((item: any) => {
                       return (

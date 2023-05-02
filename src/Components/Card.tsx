@@ -20,17 +20,25 @@ const Card = ({ item }: { item: data }) => {
   const dispatch = useAppDispatch();
   const kName = item.korean_name;
   const eName = item.english_name;
-  const [localData, setLocalData] = useState<string[]>(() => {
+  const [localData, setLocalData] = useState(() => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
 
   const addLocalData = (data: string) => {
-    setLocalData(() => {
-      const newData = [...localData, data];
-      localStorage.setItem("data", JSON.stringify(newData));
-      return newData;
-    });
+    if (
+      localData.map((item: string) => {
+        return item;
+      }) !== `${data}`
+    ) {
+      setLocalData(() => {
+        const newData = [...localData, data];
+        localStorage.setItem("data", JSON.stringify(newData));
+        return newData;
+      });
+    } else {
+      return null;
+    }
     window.location.reload();
   };
 
