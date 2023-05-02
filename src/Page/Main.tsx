@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
 import { RootState, useAppDispatch } from "../Store/store";
@@ -9,9 +9,13 @@ import MainCard from "../Components/MainCard";
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  const myAlldata = useSelector(
-    (state: RootState) => state.myAlldata.myAllData
-  );
+  // const myAlldata = useSelector(
+  //   (state: RootState) => state.myAlldata.myAllData
+  // );
+  const [localData, setLocalData] = useState<string[]>(() => {
+    const data = localStorage.getItem("data");
+    return data ? JSON.parse(data) : [];
+  });
 
   useEffect(() => {
     dispatch(getDetailData());
@@ -52,7 +56,7 @@ const Main = () => {
                       }}
                       m={2}
                     >
-                      {myAlldata.map((data: any) => {
+                      {localData.map((data: any) => {
                         return (
                           <Grid
                             item

@@ -20,8 +20,22 @@ const Card = ({ item }: { item: data }) => {
   const dispatch = useAppDispatch();
   const kName = item.korean_name;
   const eName = item.english_name;
-  const [selectList, setSelectList] = useState(false);
+  const [localData, setLocalData] = useState<string[]>(() => {
+    const data = localStorage.getItem("data");
+    return data ? JSON.parse(data) : [];
+  });
 
+  const addLocalData = (data: string) => {
+    const newData = [...localData, data];
+    localStorage.setItem("data", JSON.stringify(newData));
+    setLocalData(newData);
+  };
+
+  console.log(localData);
+  // const addLocalData = (name) => {
+  //   const newData = localData?.push(name);
+  //   localStorage.setItem("data", JSON.stringify());
+  // };
   return (
     <>
       <Container>
@@ -34,10 +48,10 @@ const Card = ({ item }: { item: data }) => {
               <Button
                 onClick={() => {
                   dispatch(addMyData(item.market));
-                  setSelectList(!selectList);
+                  addLocalData(`${item.market}`);
                 }}
               >
-                {selectList ? <AiOutlineDelete /> : <AiOutlinePlus />}
+                <AiOutlinePlus />
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>
