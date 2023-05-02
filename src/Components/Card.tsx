@@ -2,7 +2,7 @@ import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
 import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -26,16 +26,15 @@ const Card = ({ item }: { item: data }) => {
   });
 
   const addLocalData = (data: string) => {
-    const newData = [...localData, data];
-    localStorage.setItem("data", JSON.stringify(newData));
-    setLocalData(newData);
+    setLocalData(() => {
+      const newData = [...localData, data];
+      localStorage.setItem("data", JSON.stringify(newData));
+      return newData;
+    });
+    window.location.reload();
   };
 
   console.log(localData);
-  // const addLocalData = (name) => {
-  //   const newData = localData?.push(name);
-  //   localStorage.setItem("data", JSON.stringify());
-  // };
   return (
     <>
       <Container>

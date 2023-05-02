@@ -2,9 +2,8 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
-import { RootState, useAppDispatch } from "../Store/store";
+import { useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
-import { useSelector } from "react-redux";
 import MainCard from "../Components/MainCard";
 
 const Main = () => {

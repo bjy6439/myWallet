@@ -1,10 +1,24 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useState } from "react";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
 
 const MainCard = ({ data }: { data: any }) => {
   const dispatch = useAppDispatch();
+  const [localData, setLocalData] = useState<string[]>(() => {
+    const data = localStorage.getItem("data");
+    return data ? JSON.parse(data) : [];
+  });
+
+  const delLocalData = (datas: string) => {
+    const newData = localData.filter((item) => {
+      return item !== datas;
+    });
+    localStorage.setItem("data", JSON.stringify(newData));
+    console.log(localData);
+    window.location.reload();
+  };
 
   return (
     <Box sx={btnColor}>
@@ -17,7 +31,7 @@ const MainCard = ({ data }: { data: any }) => {
         <Grid item xs={2} sm={2} md={2} lg={2}>
           <Button
             onClick={() => {
-              dispatch(addMyData(data));
+              delLocalData(data);
             }}
           >
             del
