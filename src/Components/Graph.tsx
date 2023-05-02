@@ -1,9 +1,19 @@
 import { Grid, Typography } from "@mui/material";
-import { axisBottom, axisLeft, max, scaleBand, scaleLinear } from "d3";
+import {
+  axisBottom,
+  axisLeft,
+  curveCardinal,
+  line,
+  max,
+  min,
+  scaleBand,
+  scaleLinear,
+} from "d3";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../Store/store";
 import { select } from "d3-selection";
+import styled from "styled-components";
 
 const Graph = () => {
   const svg = select("svg")
@@ -18,16 +28,19 @@ const Graph = () => {
   const maxValue: any = max(detailData, (d: any) => {
     return Math.ceil(d.converted_trade_price);
   });
+  const minValue: any = min(detailData, (d: any) => {
+    return Math.ceil(d.converted_trade_price);
+  });
   const date = detailData.map((d: any) =>
     d.candle_date_time_kst.slice(-13, -9)
   );
 
-  const y = scaleLinear().domain([0, maxValue!]).range([300, 0]);
-  const x = scaleBand().domain(date).range([0, 300]).padding(0.2);
-  const yAxis = axisLeft(y)
-    .ticks(10)
+  const yScale = scaleLinear().domain([minValue, maxValue!]).range([300, 0]);
+  const xScale = scaleBand().domain(date).range([0, 500]);
+  const yAxis = axisLeft(yScale)
+    .ticks(5)
     .tickFormat((d) => `${d}₩`);
-  const xAxis = axisBottom(x);
+  const xAxis = axisBottom(xScale);
 
   useEffect(() => {
     if (!selection) {
@@ -36,30 +49,50 @@ const Graph = () => {
       const xAxisGroup = svg
         .append("g")
         .attr("transform", `translate(100,300)`)
+
         .call(xAxis);
       const yAxisGroup = svg
         .append("g")
         .attr("transform", `translate(100,0)`)
         .call(yAxis);
 
+      const lineGenerator = line()
+        .x((d: any, i: number) => xScale(date[i])! + 140)
+        .y((d: any) => yScale(d.converted_trade_price))
+        .curve(curveCardinal);
+
       svg
         .append("rect")
-        .attr("wdith", 500)
-        .attr("height", 500)
+        .attr("wdith", 600)
+        .attr("height", 600)
+        .style("display", "flex")
+        .style("justify-contents", "center")
         .attr("fill", "yellow");
 
       svg
         .append("g")
         .attr("transform", `translate(100,0)`)
-        .selectAll("rect")
+        .selectAll("circle")
         .data(detailData)
         .enter()
-        .append("rect")
-        .attr("width", 30)
-        .attr("height", (d: any) => 300 - y(d.converted_trade_price))
-        .attr("x", (d: any) => x(d.candle_date_time_kst.slice(-13, -9))!)
-        .attr("y", (d: any) => y(d.converted_trade_price))
+        .append("circle")
+        .attr("r", 5)
+        .attr("width", 70)
+        .attr("height", (d: any) => 300 - yScale(d.converted_trade_price))
+        .attr(
+          "cx",
+          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 40
+        )
+        .attr("cy", (d: any) => yScale(d.converted_trade_price))
         .attr("fill", "orange");
+
+      svg
+        .append("path")
+        .datum(detailData)
+        .attr("fill", "none")
+        .attr("stroke", "orange")
+        .attr("stroke-width", 2)
+        .attr("d", lineGenerator(detailData));
     }
   }, [detailData]);
 
@@ -77,11 +110,11 @@ const Graph = () => {
       >
         <Typography padding={3}>{detailData[0]?.market}</Typography>
         <Grid>
-          <svg ref={ref} width={500} height={350}>
+          <GraphBox ref={ref}>
             <g>
               <rect></rect>
             </g>
-          </svg>
+          </GraphBox>
         </Grid>
       </Grid>
     </>
@@ -89,3 +122,8 @@ const Graph = () => {
 };
 
 export default Graph;
+
+const GraphBox = styled.svg`
+  width: 700px;
+  height: 400px;
+`;

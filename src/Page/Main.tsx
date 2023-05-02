@@ -34,9 +34,9 @@ const Main = () => {
           <Grid item xs={12} sm={12} md={9} lg={9}>
             <Box>
               <Grid container spacing={2} justifyContent="center">
-                <Grid item xs={12} sm={10} md={10} lg={10}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <Grid container justifyContent="center">
-                    <Grid item xs={12} sm={12} md={12} lg={8} m={2}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} m={2}>
                       <Graph />
                     </Grid>
                     <Grid item xs={12} sm={10} md={12} lg={12}>
@@ -92,6 +92,6 @@ export default Main;
 //   align-items: center;
 // `;
 const cardBox = {
-  display: "flex",
-  justifyContent: "center",
+  // display: "flex",
+  // justifyContent: "center",
 };

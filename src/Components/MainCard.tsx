@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
+import Graph from "./Graph";
 
 const MainCard = ({ data }: { data: any }) => {
   const dispatch = useAppDispatch();

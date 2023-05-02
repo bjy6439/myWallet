@@ -1,8 +1,5 @@
-import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import KakaoLogin from "./Components/KakaoLogin";
-import Navigation from "./Components/Navigation";
 import Login from "./Login/Login";
 import AllBoard from "./Page/AllBoard";
 import Main from "./Page/Main";
