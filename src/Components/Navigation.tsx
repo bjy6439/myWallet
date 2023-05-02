@@ -7,20 +7,22 @@ import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
 import { useState } from "react";
 import styled from "styled-components";
+import { setButton } from "../Store/buttonSlice";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
-  const [isBtn, setIsBtn] = useState("");
+  const setBtn = useSelector((state: RootState) => state.button.button);
+
+  console.log(setBtn);
 
   const clickBtn = (name: string) => {
+    dispatch(setButton(name));
     if (name === "Dashboard") {
       navigate("/");
-      setIsBtn(name);
     } else if (name === "All board") {
       navigate("/all");
-      setIsBtn(name);
     } else {
       dispatch(onModal());
       setTimeout(() => {
@@ -48,7 +50,7 @@ const Navigation = () => {
                 return (
                   <Grid item key={id} xs={3} sm={3} md={12} textAlign="center">
                     <NavBtn
-                      primery={isBtn === name}
+                      primery={setBtn === name}
                       onClick={() => {
                         clickBtn(name);
                       }}

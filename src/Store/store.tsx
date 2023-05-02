@@ -5,6 +5,7 @@ import dataSlice from "./dataSlice";
 import { useDispatch } from "react-redux";
 import detailDataSlice from "./detailDataSlice";
 import myDataSlice from "./myDataSlice";
+import buttonSlice from "./buttonSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     mydata: dataSlice,
     detailData: detailDataSlice,
     myAlldata: myDataSlice,
+    button: buttonSlice,
   },
 });
 
