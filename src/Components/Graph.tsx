@@ -22,14 +22,16 @@ const Graph = () => {
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
   });
+  console.log(detailData);
+
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 
   const maxValue: any = max(detailData, (d: any) => {
-    return Math.ceil(d.converted_trade_price);
+    return d.opening_price;
   });
   const minValue: any = min(detailData, (d: any) => {
-    return Math.ceil(d.converted_trade_price);
+    return d.opening_price;
   });
   const date = detailData.map((d: any) =>
     d.candle_date_time_kst.slice(-13, -9)
@@ -39,7 +41,7 @@ const Graph = () => {
   const xScale = scaleBand().domain(date).range([0, 500]);
   const yAxis = axisLeft(yScale)
     .ticks(5)
-    .tickFormat((d) => `${d}₩`);
+    .tickFormat((d) => `${d}$`);
   const xAxis = axisBottom(xScale);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const Graph = () => {
 
       const lineGenerator = line()
         .x((d: any, i: number) => xScale(date[i])! + 140)
-        .y((d: any) => yScale(d.converted_trade_price))
+        .y((d: any) => yScale(d.opening_price))
         .curve(curveCardinal);
 
       svg
@@ -78,12 +80,12 @@ const Graph = () => {
         .append("circle")
         .attr("r", 5)
         .attr("width", 70)
-        .attr("height", (d: any) => 300 - yScale(d.converted_trade_price))
+        .attr("height", (d: any) => 300 - yScale(d.opening_price))
         .attr(
           "cx",
           (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 40
         )
-        .attr("cy", (d: any) => yScale(d.converted_trade_price))
+        .attr("cy", (d: any) => yScale(d.opening_price))
         .attr("fill", "orange");
 
       svg
@@ -124,6 +126,7 @@ const Graph = () => {
 export default Graph;
 
 const GraphBox = styled.svg`
+  padding: 30px;
   width: 700px;
   height: 400px;
 `;

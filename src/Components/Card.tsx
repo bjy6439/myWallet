@@ -1,7 +1,8 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
-import { useAppDispatch } from "../Store/store";
+import { RootState, useAppDispatch } from "../Store/store";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",

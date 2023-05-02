@@ -10,6 +10,10 @@ import styled from "styled-components";
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
   const market = useSelector((state: RootState) => state.mydata.myData);
+  const myAlldata = useSelector(
+    (state: RootState) => state.myAlldata.myAllData
+  );
+  console.log(myAlldata);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -73,13 +77,11 @@ const AllBoard = () => {
                     .filter(({ market }: { market: string }) => {
                       return market.split("-")[0] === dataName;
                     })
-                    .map((item) => {
+                    .map((item: any) => {
                       return (
-                        <>
-                          <Grid item xs={12} sm={12} md={6}>
-                            <Card item={item} key={item.market} />
-                          </Grid>
-                        </>
+                        <Grid item xs={12} sm={12} md={6}>
+                          <Card item={item} key={item.market} />
+                        </Grid>
                       );
                     })}
                 </Grid>

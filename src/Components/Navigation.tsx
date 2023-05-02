@@ -14,8 +14,6 @@ const Navigation = () => {
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
   const setBtn = useSelector((state: RootState) => state.button.button);
 
-  console.log(setBtn);
-
   const clickBtn = (name: string) => {
     dispatch(setButton(name));
     if (name === "Dashboard") {
