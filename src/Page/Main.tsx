@@ -1,12 +1,10 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { useEffect } from "react";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
 import { RootState, useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import { useSelector } from "react-redux";
-import { addMyData } from "../Store/myDataSlice";
 import MainCard from "../Components/MainCard";
 
 const Main = () => {
@@ -30,10 +28,10 @@ const Main = () => {
         }}
       >
         <Grid container sx={cardBox}>
-          <Grid item xs={12} sm={12} md={5} lg={3}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <Navigation />
           </Grid>
-          <Grid item xs={12} sm={12} md={7} lg={9}>
+          <Grid item xs={12} sm={12} md={9} lg={9}>
             <Box>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12} sm={10} md={10} lg={10}>

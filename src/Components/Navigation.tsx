@@ -1,59 +1,65 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "./AlertModal";
 import { useSelector } from "react-redux";
 import { closeModal, onModal } from "../Store/modalSlice";
 import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
+import { useState } from "react";
+import styled from "styled-components";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
+  const [isBtn, setIsBtn] = useState("");
+
+  const clickBtn = (name: string) => {
+    if (name === "Dashboard") {
+      navigate("/");
+      setIsBtn(name);
+    } else if (name === "All board") {
+      navigate("/all");
+      setIsBtn(name);
+    } else {
+      dispatch(onModal());
+      setTimeout(() => {
+        dispatch(closeModal());
+      }, 1500);
+    }
+  };
 
   return (
     <Container>
       <Box>
         <Grid container>
-          <Grid item xs={12}>
-            <Button
+          <Grid item xs={12} textAlign="center">
+            <Logo
               onClick={() => {
                 navigate("/");
               }}
             >
-              <Typography variant="h4" padding={4} mt={2}>
-                My Wallet
-              </Typography>
-            </Button>
+              <LogoImg src="/images/logo.png" alt="logo" />
+            </Logo>
           </Grid>
-          <Grid item xs={12} justifyContent="center" alignItems="center">
+          <Grid item xs={12}>
             <Grid container mb={3} textAlign="center">
               {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
                 return (
                   <Grid item key={id} xs={3} sm={3} md={12} textAlign="center">
-                    <Button
-                      variant="text"
+                    <NavBtn
+                      primery={isBtn === name}
                       onClick={() => {
-                        if (name === "대시보드") {
-                          navigate("/");
-                        } else if (name === "모든 거래") {
-                          navigate("/all");
-                        } else {
-                          dispatch(onModal());
-                          setTimeout(() => {
-                            dispatch(closeModal());
-                          }, 1500);
-                        }
+                        clickBtn(name);
                       }}
                     >
                       {name}
-                    </Button>
+                    </NavBtn>
                   </Grid>
                 );
               })}
               <Grid item xs={3} sm={3} md={12} textAlign="center">
-                <Button
-                  variant="text"
+                <NavBtn
                   onClick={() => {
                     if (isLogin) {
                       dispatch(logout());
@@ -64,7 +70,7 @@ const Navigation = () => {
                   }}
                 >
                   {isLogin ? "logout" : "login"}
-                </Button>
+                </NavBtn>
               </Grid>
             </Grid>
           </Grid>
@@ -78,7 +84,36 @@ const Navigation = () => {
 export default Navigation;
 
 const BUTTONLIST = [
-  { id: 1, name: "대시보드" },
-  { id: 2, name: "모든 거래" },
-  { id: 3, name: "나의 거래" },
+  { id: 1, name: "Dashboard" },
+  { id: 2, name: "All board" },
+  { id: 3, name: "My board" },
 ];
+
+const Logo = styled.button`
+  background-color: white;
+  border: none;
+  font-size: 40px;
+  margin: 30px;
+  border-radius: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const NavBtn = styled.button<{ primery?: boolean }>`
+  background-color: ${(props) => (props.primery ? "#626fe9" : "white")};
+  color: ${(props) => (props.primery ? "white" : "black")};
+  border: none;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 15px;
+  &:hover {
+    background-color: #626fe9;
+    color: white;
+    cursor: pointer;
+  }
+`;
+
+const LogoImg = styled.img`
+  width: 100px;
+`;

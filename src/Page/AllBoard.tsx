@@ -1,11 +1,11 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import Card from "../Components/Card";
 import Navigation from "../Components/Navigation";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Store/store";
 import { getAllData } from "../Store/dataSlice";
+import styled from "styled-components";
 
 const AllBoard = () => {
   const [dataName, setDataName] = useState("BTC");
@@ -44,13 +44,14 @@ const AllBoard = () => {
                 {BtnName.map(({ id, name }) => {
                   return (
                     <Grid item key={id} textAlign="center">
-                      <Button
+                      <NavBtn
+                        primery={dataName === name}
                         onClick={() => {
                           setDataName(name);
                         }}
                       >
                         {name}
-                      </Button>
+                      </NavBtn>
                     </Grid>
                   );
                 })}
@@ -63,7 +64,7 @@ const AllBoard = () => {
                   padding: 4,
                   display: "flex",
                   justifyContent: "center",
-                  height: "80vh",
+                  height: "70vh",
                   "&::-webkit-scrollbar": { display: "none" },
                 }}
               >
@@ -103,3 +104,17 @@ const BtnName = [
   { id: 2, name: "KRW" },
   { id: 3, name: "USDT" },
 ];
+
+const NavBtn = styled.button<{ primery?: boolean }>`
+  background-color: ${(props) => (props.primery ? "#626fe9" : "white")};
+  color: ${(props) => (props.primery ? "white" : "black")};
+  border: none;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 15px;
+  &:hover {
+    background-color: #626fe9;
+    color: white;
+    cursor: pointer;
+  }
+`;
