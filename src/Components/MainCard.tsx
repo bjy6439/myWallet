@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { useAppDispatch } from "../Store/store";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const MainCard = ({ data }: { data: any }) => {
   const [localData, setLocalData] = useState<string[]>(() => {
@@ -21,7 +21,7 @@ const MainCard = ({ data }: { data: any }) => {
   return (
     <Box sx={btnColor}>
       <Grid container alignItems="center">
-        <Grid item xs={8} sm={8} md={8} lg={8}>
+        <Grid item xs={10} sm={10} md={10} lg={10}>
           <Typography variant="body2" p={2}>
             {data}
           </Typography>
@@ -32,7 +32,7 @@ const MainCard = ({ data }: { data: any }) => {
               delLocalData(data);
             }}
           >
-            del
+            <RiDeleteBin6Line />
           </Button>
         </Grid>
       </Grid>
