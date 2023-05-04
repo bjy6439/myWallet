@@ -3,6 +3,7 @@ import {
   axisBottom,
   axisLeft,
   curveCardinal,
+  dispatch,
   line,
   max,
   min,
@@ -11,9 +12,10 @@ import {
 } from "d3";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../Store/store";
+import { RootState, useAppDispatch } from "../Store/store";
 import { select } from "d3-selection";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Graph = () => {
   const svg = select("svg")
@@ -22,6 +24,10 @@ const Graph = () => {
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
   });
+
+  const noData = localStorage.getItem("data")?.length === 2;
+
+  console.log(noData);
 
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
@@ -38,6 +44,7 @@ const Graph = () => {
 
   const yScale = scaleLinear().domain([minValue, maxValue!]).range([300, 0]);
   const xScale = scaleBand().domain(date).range([0, 500]);
+
   const yAxis = axisLeft(yScale)
     .ticks(5)
     .tickFormat((d) => `${d}$`);
@@ -65,29 +72,22 @@ const Graph = () => {
         .curve(curveCardinal);
 
       svg
-        .append("rect")
-        .attr("wdith", 600)
-        .attr("height", 600)
-        .style("display", "flex")
-        .style("justify-contents", "center")
-        .attr("fill", "yellow");
-
-      svg
         .append("g")
         .attr("transform", `translate(100,0)`)
         .selectAll("circle")
         .data(detailData)
-        .enter()
-        .append("circle")
-        .attr("r", 5)
-        .attr("width", 70)
-        .attr("height", (d: any) => 300 - yScale(d.opening_price))
-        .attr(
-          "cx",
-          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
-        )
-        .attr("cy", (d: any) => yScale(d.opening_price))
-        .attr("fill", "#6365dd");
+        .enter();
+      // .append("circle")
+      // .attr("r", 5)
+      // .attr("width", 70)
+      // .attr("height", (d: any) => 300 - yScale(d.opening_price))
+      // .attr(
+      //   "cx",
+      //   (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
+      // )
+      // .attr("cy", (d: any) => yScale(d.opening_price))
+      // .attr("fill", "#6365dd");
+      // 원
 
       svg
         .append("path")
@@ -105,8 +105,6 @@ const Graph = () => {
       <Grid
         container
         sx={{
-          // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          // backgroundColor: "#f5f6ff",
           overflow: "scroll",
           "&::-webkit-scrollbar": { display: "none" },
         }}
@@ -118,13 +116,21 @@ const Graph = () => {
         <Grid item>
           <Typography padding={3}>{detailData[0]?.market}</Typography>
         </Grid>
-        <Grid item>
+        <Grid item></Grid>
+        {noData ? (
+          <>
+            <div>스크랩한 종목이 없습니다.</div>
+            <Link style={{ margin: "10px", textDecoration: "none" }} to="/all">
+              종목 선택하러가기
+            </Link>
+          </>
+        ) : (
           <GraphBox ref={ref}>
             <g>
               <rect></rect>
             </g>
           </GraphBox>
-        </Grid>
+        )}
       </Grid>
     </>
   );

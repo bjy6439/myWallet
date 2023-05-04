@@ -61,6 +61,7 @@ const Main = () => {
                         return (
                           <Grid
                             item
+                            key={data}
                             xs={12}
                             sm={5}
                             md={5}

@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Graph from "./Graph";
 
 const MainCard = ({ data }: { data: any }) => {
   const [localData, setLocalData] = useState<string[]>(() => {
@@ -14,7 +15,6 @@ const MainCard = ({ data }: { data: any }) => {
       return item !== datas;
     });
     localStorage.setItem("data", JSON.stringify(newData));
-    console.log(localData);
     window.location.reload();
   };
 
@@ -34,6 +34,9 @@ const MainCard = ({ data }: { data: any }) => {
           >
             <RiDeleteBin6Line />
           </Button>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Graph />
         </Grid>
       </Grid>
     </Box>
