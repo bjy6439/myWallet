@@ -1,7 +1,7 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
-import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
 const style = {
@@ -26,23 +26,20 @@ const Card = ({ item }: { item: data }) => {
   });
 
   const addLocalData = (data: string) => {
-    if (
-      localData.map((item: string) => {
-        return item;
-      }) !== `${data}`
-    ) {
-      setLocalData(() => {
-        const newData = [...localData, data];
-        localStorage.setItem("data", JSON.stringify(newData));
-        return newData;
-      });
+    if (!localData.includes(data)) {
+      const newData = [...localData, data];
+      localStorage.setItem("data", JSON.stringify(newData));
+      setLocalData(newData);
+      window.location.reload();
     } else {
-      return null;
+      const delData = localData.filter((item: string) => {
+        return item !== data;
+      });
+      localStorage.setItem("data", JSON.stringify(delData));
+      window.location.reload();
     }
-    window.location.reload();
   };
 
-  console.log(localData);
   return (
     <>
       <Container>
@@ -58,7 +55,7 @@ const Card = ({ item }: { item: data }) => {
                   addLocalData(`${item.market}`);
                 }}
               >
-                <AiOutlinePlus />
+                {localData.includes(item.market) ? "x" : <AiOutlinePlus />}
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>

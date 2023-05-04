@@ -8,16 +8,15 @@ import MainCard from "../Components/MainCard";
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  // const myAlldata = useSelector(
-  //   (state: RootState) => state.myAlldata.myAllData
-  // );
   const [localData, setLocalData] = useState<string[]>(() => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
 
   const storedData = localStorage.getItem("data");
-  const ccc: string | null = storedData ? JSON.parse(storedData)[0] : null;
+  const ccc: string | null = storedData
+    ? JSON.parse(storedData)[0]
+    : "USDT - ETH";
 
   useEffect(() => {
     dispatch(getDetailData(`${ccc}`));

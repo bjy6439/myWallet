@@ -78,8 +78,8 @@ const AllBoard = () => {
                     })
                     .map((item: any) => {
                       return (
-                        <Grid item xs={12} sm={12} md={6}>
-                          <Card item={item} key={item.market} />
+                        <Grid item xs={12} sm={12} md={6} key={item.market}>
+                          <Card item={item} />
                         </Grid>
                       );
                     })}

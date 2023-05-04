@@ -23,11 +23,6 @@ const Graph = () => {
     return state.detailData.dataInfo;
   });
 
-  const storedData = localStorage.getItem("data");
-  const ccc: string | null = storedData ? JSON.parse(storedData)[0] : null;
-
-  console.log(ccc);
-
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 
@@ -110,8 +105,8 @@ const Graph = () => {
       <Grid
         container
         sx={{
-          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          backgroundColor: "#f5f6ff",
+          // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          // backgroundColor: "#f5f6ff",
           overflow: "scroll",
           "&::-webkit-scrollbar": { display: "none" },
         }}

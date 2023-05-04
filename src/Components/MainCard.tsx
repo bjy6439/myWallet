@@ -1,11 +1,9 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
 
 const MainCard = ({ data }: { data: any }) => {
-  const dispatch = useAppDispatch();
   const [localData, setLocalData] = useState<string[]>(() => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
