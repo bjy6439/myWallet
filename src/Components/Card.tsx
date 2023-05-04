@@ -1,7 +1,7 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
 const style = {
@@ -39,7 +39,6 @@ const Card = ({ item }: { item: data }) => {
       window.location.reload();
     }
   };
-
   return (
     <>
       <Container>
@@ -50,12 +49,17 @@ const Card = ({ item }: { item: data }) => {
             </Grid>
             <Grid item xs={2} sm={2} md={2}>
               <Button
+                sx={{ fontSize: "20px" }}
                 onClick={() => {
                   dispatch(addMyData(item.market));
                   addLocalData(`${item.market}`);
                 }}
               >
-                {localData.includes(item.market) ? "x" : <AiOutlinePlus />}
+                {localData.includes(item.market) ? (
+                  <AiFillStar />
+                ) : (
+                  <AiOutlineStar />
+                )}
               </Button>
             </Grid>
             <Grid item xs={12} sm={12} md={12} m={1}>
