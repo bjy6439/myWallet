@@ -32,7 +32,7 @@ const Main = () => {
           marginTop: 2,
         }}
       >
-        <Grid container sx={cardBox}>
+        <Grid container>
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Navigation />
           </Grid>
@@ -44,16 +44,13 @@ const Main = () => {
                     <Grid item xs={12} sm={12} md={12} lg={12} m={2}>
                       <Graph />
                     </Grid>
-                    <Grid item xs={12} sm={10} md={12} lg={12}>
-                      <Typography variant="subtitle1">
-                        나의 관심 종목
-                      </Typography>
-                    </Grid>
                     <Grid
                       container
                       sx={{
                         height: "200px",
                         overflowY: "scroll",
+                        display: "flex",
+                        justifyContent: "center",
                       }}
                       m={2}
                     >
@@ -88,16 +85,3 @@ const Main = () => {
 };
 
 export default Main;
-
-// const Background = styled.div`
-//   /* background-color: #ece8e7;
-//   width: 100vw;
-//   /* height: 100vh; */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-const cardBox = {
-  // display: "flex",
-  // justifyContent: "center",
-};

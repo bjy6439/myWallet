@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import styled from "styled-components";
 import Graph from "./Graph";
 
 const MainCard = ({ data }: { data: any }) => {
@@ -18,10 +19,15 @@ const MainCard = ({ data }: { data: any }) => {
     window.location.reload();
   };
 
+  console.log(data);
+
   return (
     <Box sx={btnColor}>
       <Grid container alignItems="center">
-        <Grid item xs={10} sm={10} md={10} lg={10}>
+        <Grid item xs={2} sm={2} md={2} lg={2}>
+          <Img src="/images/logo.png"></Img>
+        </Grid>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography variant="body2" p={2}>
             {data}
           </Typography>
@@ -35,9 +41,6 @@ const MainCard = ({ data }: { data: any }) => {
             <RiDeleteBin6Line />
           </Button>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Graph />
-        </Grid>
       </Grid>
     </Box>
   );
@@ -50,3 +53,8 @@ const btnColor = {
   borderRadius: 5,
   padding: 1,
 };
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+`;

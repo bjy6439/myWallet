@@ -114,16 +114,24 @@ const Graph = () => {
         alignItems="center"
       >
         <Grid item>
-          <Typography padding={3}>{detailData[0]?.market}</Typography>
+          <p>{detailData[0]?.market}</p>
         </Grid>
         <Grid item></Grid>
         {noData ? (
-          <>
-            <div>스크랩한 종목이 없습니다.</div>
+          <Grid
+            sx={{
+              height: "500px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <p>스크랩한 종목이 없습니다.</p>
             <Link style={{ margin: "10px", textDecoration: "none" }} to="/all">
               종목 선택하러가기
             </Link>
-          </>
+          </Grid>
         ) : (
           <GraphBox ref={ref}>
             <g>
