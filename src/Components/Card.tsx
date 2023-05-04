@@ -3,6 +3,7 @@ import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -44,10 +45,13 @@ const Card = ({ item }: { item: data }) => {
       <Container>
         <Box sx={style}>
           <Grid container p={2} padding={2}>
-            <Grid item xs={9} sm={9} md={9} m={1}>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
+              <Img src="/images/logo.png"></Img>
+            </Grid>
+            <Grid item xs={7} sm={7} md={7} m={1}>
               마켓 : {item.market}
             </Grid>
-            <Grid item xs={2} sm={2} md={2}>
+            <Grid item xs={1} sm={1} md={1}>
               <Button
                 sx={{ fontSize: "20px" }}
                 onClick={() => {
@@ -76,3 +80,7 @@ const Card = ({ item }: { item: data }) => {
 };
 
 export default Card;
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+`;
