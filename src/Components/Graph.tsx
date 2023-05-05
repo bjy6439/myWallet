@@ -76,26 +76,43 @@ const Graph = () => {
         .attr("transform", `translate(100,0)`)
         .selectAll("circle")
         .data(detailData)
-        .enter();
-      // .append("circle")
-      // .attr("r", 5)
-      // .attr("width", 70)
-      // .attr("height", (d: any) => 300 - yScale(d.opening_price))
-      // .attr(
-      //   "cx",
-      //   (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
-      // )
-      // .attr("cy", (d: any) => yScale(d.opening_price))
-      // .attr("fill", "#6365dd");
+        .enter()
+        .append("circle")
+        .attr("r", 5)
+        .attr("width", 70)
+        .attr("height", (d: any) => 300 - yScale(d.opening_price))
+        .attr(
+          "cx",
+          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
+        )
+        .attr("cy", (d: any) => yScale(d.opening_price))
+        .attr("fill", "#6365dd");
       // 원
 
-      svg
+      // svg
+      //   .append("path")
+      //   .datum(detailData)
+      //   .attr("fill", "none")
+      //   .attr("stroke", "#6365dd")
+      //   .attr("stroke-width", 2)
+      //   .attr("d", lineGenerator(detailData));
+
+      const path = svg
+        .append("g")
+        .attr("transform", `translate(0,0)`)
         .append("path")
         .datum(detailData)
         .attr("fill", "none")
         .attr("stroke", "#6365dd")
         .attr("stroke-width", 2)
         .attr("d", lineGenerator(detailData));
+
+      path
+        .attr("stroke-dasharray", path.node()?.getTotalLength() || "0")
+        .attr("stroke-dashoffset", path.node()?.getTotalLength() || "0")
+        .transition()
+        .duration(3000)
+        .attr("stroke-dashoffset", "0");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailData]);
