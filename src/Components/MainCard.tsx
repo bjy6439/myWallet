@@ -6,6 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../Store/store";
+import Graph from "./Graph";
 
 const MainCard = ({ data }: { data: any }) => {
   const [localData, setLocalData] = useState<string[]>(() => {
@@ -24,7 +25,9 @@ const MainCard = ({ data }: { data: any }) => {
   };
   const [icon, setIcon] = useState<string>("/imgaes/logo.png");
 
-  const selectCard = detailData[0]?.market === data.market;
+  const changes = data.change_price < 0;
+  const isSelect = detailData[0]?.market === data.market;
+  console.log(isSelect);
 
   const getIcons = async () => {
     const res = await axios.get("/data/icons.json");
@@ -35,19 +38,24 @@ const MainCard = ({ data }: { data: any }) => {
     });
   };
 
+  const roundedNum = Math.ceil(data.change_rate * 10000) / 10000;
+  const roundedStr = roundedNum.toFixed(2);
+
   useEffect(() => {
     getIcons();
   });
 
   return (
-    <BtnColor selectCard={selectCard}>
+    <BtnColor changes={changes} isSelect={isSelect}>
       <Grid container alignItems="center" p={1}>
         <Grid item xs={2} sm={2} md={2} lg={2}>
           <Img src={icon}></Img>
         </Grid>
-        <Grid item xs={8} sm={8} md={8} lg={8}>
-          <Typography variant="body2" p={2}>
-            {data.market}
+        <Grid item xs={8} sm={8} md={8} lg={8} p={1}>
+          <Typography variant="body2">{data.market}</Typography>
+          <Typography variant="body2">
+            {changes ? "" : "+"}
+            {roundedStr}%
           </Typography>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
@@ -65,9 +73,12 @@ const MainCard = ({ data }: { data: any }) => {
 };
 
 export default MainCard;
-const BtnColor = styled.div<{ selectCard?: boolean }>`
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: ${(props) => (props.selectCard ? "#feeaf3" : "#effcf1")};
+const BtnColor = styled.div<{ changes?: boolean; isSelect?: boolean }>`
+  box-shadow: ${(props) =>
+    props.isSelect
+      ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
+      : "rgba(0, 0, 0, 0.24) 0px 3px 8px"};
+  background-color: ${(props) => (props.changes ? "#feeaf3" : "#effcf1")};
   border-radius: 10px;
   padding: 3px;
 `;

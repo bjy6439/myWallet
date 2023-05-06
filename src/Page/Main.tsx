@@ -39,7 +39,7 @@ const Main = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(getDetailData(`${ccc}`));
-    }, 200);
+    }, 1000);
     getItem();
   }, []);
 
