@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "name": "BTC-ETC",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 2,
+    "name": "BTC-CVC",
+    "src": "/images/BTC-CVC.png"
+  },
+  {
+    "id": 3,
+    "name": "BTC-ETH",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 9,
+    "name": "KRW-ETH",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 4,
+    "name": "BTC-SC",
+    "src": "/images/BTC-SC.png"
+  },
+  {
+    "id": 5,
+    "name": "KRW-BTC",
+    "src": "/images/KRW-BTC.png"
+  },
+  {
+    "id": 6,
+    "name": "KRW-STEEM",
+    "src": "/images/KRW-STEEM.png"
+  },
+  {
+    "id": 7,
+    "name": "KRW-MTL",
+    "src": "/images/KRW-MTL.png"
+  },
+  {
+    "id": 8,
+    "name": "KRW-XRP",
+    "src": "/images/BTC-XRP.png"
+  },
+  {
+    "id": 10,
+    "name": "BTC-XRP",
+    "src": "/images/BTC-XRP.png"
+  },
+  {
+    "id": 11,
+    "name": "KRW-NEO",
+    "src": "/images/KRW-NEO.png"
+  },
+  {
+    "id": 12,
+    "name": "KRW-ETC",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 13,
+    "name": "USDT-BTC",
+    "src": "/images/KRW-BTC.png"
+  },
+  {
+    "id": 14,
+    "name": "USDT-ETH",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 15,
+    "name": "USDT-XRP",
+    "src": "/images/BTC-XRP.png"
+  },
+  {
+    "id": 16,
+    "name": "USDT-ETC",
+    "src": "/images/BTC-ETH.png"
+  },
+  {
+    "id": 17,
+    "name": "USDT-ADA",
+    "src": "/images/USDT-ADA.png"
+  },
+  {
+    "id": 18,
+    "name": "USDT-TUSD",
+    "src": "/images/USDT-TUSD.png"
+  },
+  {
+    "id": 19,
+    "name": "USDT-SC",
+    "src": "/images/BTC-SC.png"
+  },
+  {
+    "id": 20,
+    "name": "USDT-TRX",
+    "src": "/images/USDT-TRX.png"
+  },
+  {
+    "id": 21,
+    "name": "BTC-DGB",
+    "src": "/images/BTC-DGB.jpeg"
+  },
+  {
+    "id": 22,
+    "name": "BTC-SNT",
+    "src": "/images/BTC-SNT.png"
+  },
+  {
+    "id": 23,
+    "name": "KRW-SNT",
+    "src": "/images/BTC-SNT.png"
+  },
+  {
+    "id": 23,
+    "name": "KRW-WAVES",
+    "src": "/images/BTC-WAVES.png"
+  },
+  {
+    "id": 23,
+    "name": "BTC-WAVES",
+    "src": "/images/BTC-WAVES.png"
+  }
+]

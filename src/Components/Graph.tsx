@@ -27,8 +27,6 @@ const Graph = () => {
 
   const noData = localStorage.getItem("data")?.length === 2;
 
-  console.log(noData);
-
   const ref = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<any>(null);
 

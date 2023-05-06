@@ -4,6 +4,7 @@ import { useAppDispatch } from "../Store/store";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -25,6 +26,7 @@ const Card = ({ item }: { item: data }) => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
+  const [icon, setIcon] = useState<string>("/images/logo.png");
 
   const addLocalData = (data: string) => {
     if (!localData.includes(data)) {
@@ -40,13 +42,27 @@ const Card = ({ item }: { item: data }) => {
       window.location.reload();
     }
   };
+
+  const getIcons = async () => {
+    const res = await axios.get("/data/icons.json");
+    res.data.filter((icon: any) => {
+      if (icon.name === item.market) {
+        return setIcon(icon.src);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getIcons();
+  });
+
   return (
     <>
       <Container>
         <Box sx={style}>
           <Grid container p={2} padding={2}>
             <Grid item xs={2} sm={2} md={2} lg={2}>
-              <Img src="/images/logo.png"></Img>
+              <Img src={icon} alt={"icon"}></Img>
             </Grid>
             <Grid item xs={7} sm={7} md={7} m={1}>
               마켓 : {item.market}
@@ -80,6 +96,7 @@ const Card = ({ item }: { item: data }) => {
 };
 
 export default Card;
+
 const Img = styled.img`
   width: 100%;
   height: 100%;
