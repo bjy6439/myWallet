@@ -36,6 +36,7 @@ const Navigation = () => {
             <Logo
               onClick={() => {
                 navigate("/");
+                clickBtn("Dashboard");
               }}
             >
               <LogoImg src="/images/logo.png" alt="logo" />
