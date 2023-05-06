@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import {
   axisBottom,
   axisLeft,
-  curveCardinal,
+  curveLinear,
   line,
   max,
   min,
@@ -57,7 +57,6 @@ const Graph = () => {
       const xAxisGroup = svg
         .append("g")
         .attr("transform", `translate(100,300)`)
-
         .call(xAxis);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const yAxisGroup = svg
@@ -65,10 +64,12 @@ const Graph = () => {
         .attr("transform", `translate(100,0)`)
         .call(yAxis);
 
+      xAxisGroup.selectAll("text").remove();
+
       const lineGenerator = line()
         .x((d: any, i: number) => xScale(date[i])! + 125)
         .y((d: any) => yScale(d.opening_price))
-        .curve(curveCardinal);
+        .curve(curveLinear);
 
       svg
         .append("g")
@@ -78,7 +79,6 @@ const Graph = () => {
         .enter()
         .append("circle")
         .attr("r", 5)
-        .attr("width", 70)
         .attr("height", (d: any) => 300 - yScale(d.opening_price))
         .attr(
           "cx",
@@ -162,5 +162,5 @@ export default Graph;
 const GraphBox = styled.svg`
   padding: 30px;
   width: 700px;
-  height: 400px;
+  height: 310px;
 `;

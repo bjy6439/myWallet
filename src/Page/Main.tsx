@@ -68,7 +68,7 @@ const Main = () => {
                     <Grid
                       container
                       sx={{
-                        height: "200px",
+                        height: "300px",
                         overflowY: "scroll",
                         display: "flex",
                         justifyContent: "center",

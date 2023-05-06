@@ -27,7 +27,7 @@ const MainCard = ({ data }: { data: any }) => {
 
   const changes = data.change_price < 0;
   const isSelect = detailData[0]?.market === data.market;
-  console.log(isSelect);
+  console.log(data);
 
   const getIcons = async () => {
     const res = await axios.get("/data/icons.json");
@@ -57,6 +57,7 @@ const MainCard = ({ data }: { data: any }) => {
             {changes ? "" : "+"}
             {roundedStr}%
           </Typography>
+          {/* <Typography variant="body2">{data.}</Typography> */}
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
           <Button
