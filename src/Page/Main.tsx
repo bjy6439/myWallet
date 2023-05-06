@@ -5,6 +5,7 @@ import Graph from "../Components/Graph";
 import { useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import MainCard from "../Components/MainCard";
+import axios from "axios";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,23 @@ const Main = () => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
+  const [datas, setDatas] = useState<any>([]);
+
+  useEffect(() => {
+    localData.map((item: string) => {
+      return getData(item);
+    });
+  }, []);
+
+  const getData = async (name: string) => {
+    const res = await axios.get(
+      `https://api.upbit.com/v1/candles/days?market=${name}&count=1`
+    );
+    setDatas((prev: any) => {
+      const newDatas = [...prev, res.data[0]];
+      return newDatas;
+    });
+  };
 
   const storedData = localStorage.getItem("data");
   const ccc: string | null = storedData
@@ -54,21 +72,21 @@ const Main = () => {
                       }}
                       m={2}
                     >
-                      {localData.map((data: any) => {
+                      {datas.map((item: any) => {
                         return (
                           <Grid
                             item
-                            key={data}
+                            key={item.market}
                             xs={12}
                             sm={5}
                             md={5}
                             lg={5}
                             m={1}
                             onClick={() => {
-                              dispatch(getDetailData(data));
+                              dispatch(getDetailData(item.market));
                             }}
                           >
-                            <MainCard data={data} />
+                            <MainCard data={item} />
                           </Grid>
                         );
                       })}

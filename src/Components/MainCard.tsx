@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { RootState } from "../Store/store";
 
 const MainCard = ({ data }: { data: any }) => {
+  console.log(data);
   const [localData, setLocalData] = useState<string[]>(() => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
@@ -24,12 +25,12 @@ const MainCard = ({ data }: { data: any }) => {
   };
   const [icon, setIcon] = useState<string>("/imgaes/logo.png");
 
-  const selectCard = detailData[0]?.market === data;
+  const selectCard = detailData[0]?.market === data.market;
 
   const getIcons = async () => {
     const res = await axios.get("/data/icons.json");
     res.data.filter((icon: any) => {
-      if (icon.name === data) {
+      if (icon.name === data.market) {
         return setIcon(icon.src);
       }
     });
@@ -47,13 +48,13 @@ const MainCard = ({ data }: { data: any }) => {
         </Grid>
         <Grid item xs={8} sm={8} md={8} lg={8}>
           <Typography variant="body2" p={2}>
-            {data}
+            {data.market}
           </Typography>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
           <Button
             onClick={() => {
-              delLocalData(data);
+              delLocalData(data.market);
             }}
           >
             <RiDeleteBin6Line />

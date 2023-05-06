@@ -1,9 +1,8 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   axisBottom,
   axisLeft,
   curveCardinal,
-  dispatch,
   line,
   max,
   min,
@@ -12,12 +11,13 @@ import {
 } from "d3";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../Store/store";
+import { RootState } from "../Store/store";
 import { select } from "d3-selection";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Graph = () => {
+  const [selection, setSelection] = useState<any>(null);
   const svg = select("svg")
     .call((g) => g.select("svg").remove())
     .append("svg");
@@ -25,10 +25,11 @@ const Graph = () => {
     return state.detailData.dataInfo;
   });
 
+  const a = detailData[0]?.market.indexOf("KRW") !== -1 ? "₩" : "$";
+
   const noData = localStorage.getItem("data")?.length === 2;
 
   const ref = useRef<SVGSVGElement | null>(null);
-  const [selection, setSelection] = useState<any>(null);
 
   const maxValue: any = max(detailData, (d: any) => {
     return d.opening_price;
@@ -45,7 +46,7 @@ const Graph = () => {
 
   const yAxis = axisLeft(yScale)
     .ticks(5)
-    .tickFormat((d) => `${d}$`);
+    .tickFormat((d) => `${d}${a}`);
   const xAxis = axisBottom(xScale);
 
   useEffect(() => {
@@ -87,14 +88,6 @@ const Graph = () => {
         .attr("fill", "#6365dd");
       // 원
 
-      // svg
-      //   .append("path")
-      //   .datum(detailData)
-      //   .attr("fill", "none")
-      //   .attr("stroke", "#6365dd")
-      //   .attr("stroke-width", 2)
-      //   .attr("d", lineGenerator(detailData));
-
       const path = svg
         .append("g")
         .attr("transform", `translate(0,0)`)
@@ -112,6 +105,7 @@ const Graph = () => {
         .duration(3000)
         .attr("stroke-dashoffset", "0");
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailData]);
 
@@ -126,12 +120,12 @@ const Graph = () => {
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        alignItems="center"
+        alignItems="flex-start"
+        m={3}
       >
-        <Grid item>
+        <Grid>
           <p>{detailData[0]?.market}</p>
         </Grid>
-        <Grid item></Grid>
         {noData ? (
           <Grid
             sx={{
@@ -141,6 +135,10 @@ const Graph = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            item
+            xs={12}
+            sm={12}
+            md={12}
           >
             <p>스크랩한 종목이 없습니다.</p>
             <Link style={{ margin: "10px", textDecoration: "none" }} to="/all">
