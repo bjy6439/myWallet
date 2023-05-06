@@ -8,7 +8,6 @@ import styled from "styled-components";
 import { RootState } from "../Store/store";
 
 const MainCard = ({ data }: { data: any }) => {
-  console.log(data);
   const [localData, setLocalData] = useState<string[]>(() => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];

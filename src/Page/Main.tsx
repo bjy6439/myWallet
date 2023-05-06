@@ -15,12 +15,6 @@ const Main = () => {
   });
   const [datas, setDatas] = useState<any>([]);
 
-  useEffect(() => {
-    localData.map((item: string) => {
-      return getData(item);
-    });
-  }, []);
-
   const getData = async (name: string) => {
     const res = await axios.get(
       `https://api.upbit.com/v1/candles/days?market=${name}&count=1`
@@ -34,10 +28,19 @@ const Main = () => {
   const storedData = localStorage.getItem("data");
   const ccc: string | null = storedData
     ? JSON.parse(storedData)[0]
-    : "USDT - ETH";
+    : "USDT-ETH";
+
+  const getItem = () => {
+    localData.map((item: string) => {
+      return getData(item);
+    });
+  };
 
   useEffect(() => {
-    dispatch(getDetailData(`${ccc}`));
+    setTimeout(() => {
+      dispatch(getDetailData(`${ccc}`));
+    }, 200);
+    getItem();
   }, []);
 
   return (
