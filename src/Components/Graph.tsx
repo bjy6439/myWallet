@@ -86,6 +86,7 @@ const Graph = () => {
         )
         .attr("cy", (d: any) => yScale(d.opening_price))
         .attr("fill", "#6365dd");
+
       // 원
 
       const path = svg

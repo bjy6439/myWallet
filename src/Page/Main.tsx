@@ -50,7 +50,7 @@ const Main = () => {
           bgcolor: "background.paper",
           boxShadow: 5,
           borderRadius: 2,
-          marginTop: 2,
+          marginY: 4,
         }}
       >
         <Grid container>
