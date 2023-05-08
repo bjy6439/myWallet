@@ -87,7 +87,6 @@ export default Navigation;
 const BUTTONLIST = [
   { id: 1, name: "Dashboard" },
   { id: 2, name: "All board" },
-  { id: 3, name: "My board" },
 ];
 
 const Logo = styled.button`
