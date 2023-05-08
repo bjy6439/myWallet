@@ -47,7 +47,15 @@ const Navigation = () => {
             <Grid container mb={3} textAlign="center">
               {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
                 return (
-                  <Grid item key={id} xs={3} sm={3} md={12} textAlign="center">
+                  <Grid
+                    item
+                    key={id}
+                    xs={3}
+                    sm={3}
+                    md={12}
+                    p={1}
+                    textAlign="center"
+                  >
                     <NavBtn
                       primery={setBtn === name}
                       onClick={() => {
