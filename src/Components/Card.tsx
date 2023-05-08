@@ -32,13 +32,13 @@ const Card = ({ item }: { item: data }) => {
       const newData = [...localData, data];
       localStorage.setItem("data", JSON.stringify(newData));
       setLocalData(newData);
-      window.location.reload();
+      // window.location.reload();
     } else {
       const delData = localData.filter((item: string) => {
         return item !== data;
       });
       localStorage.setItem("data", JSON.stringify(delData));
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
@@ -53,7 +53,11 @@ const Card = ({ item }: { item: data }) => {
 
   useEffect(() => {
     getIcons();
-  });
+    setLocalData(() => {
+      const data = localStorage.getItem("data");
+      return data ? JSON.parse(data) : [];
+    });
+  }, [localData]);
 
   return (
     <>

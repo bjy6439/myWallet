@@ -7,7 +7,6 @@ import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
 import styled from "styled-components";
 import { setButton } from "../Store/buttonSlice";
-import { useEffect } from "react";
 
 const Navigation = () => {
   const navigate = useNavigate();

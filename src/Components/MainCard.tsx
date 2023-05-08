@@ -43,7 +43,7 @@ const MainCard = ({ data }: { data: any }) => {
 
   useEffect(() => {
     getIcons();
-  });
+  }, []);
 
   return (
     <BtnColor changes={changes} isSelect={isSelect}>
