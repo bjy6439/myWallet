@@ -15,7 +15,6 @@ const AllBoard = () => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
-  console.log(localData);
 
   useEffect(() => {
     dispatch(getAllData());

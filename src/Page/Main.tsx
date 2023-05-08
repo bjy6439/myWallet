@@ -44,7 +44,6 @@ const Main = () => {
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Navigation />
           </Grid>
-          <button onClick={getUserInfo}>123</button>
           <Grid item xs={12} sm={12} md={9} lg={9}>
             <Box>
               <Grid container spacing={2} justifyContent="center">
