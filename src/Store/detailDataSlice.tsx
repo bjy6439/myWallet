@@ -13,7 +13,7 @@ export const getDetailData = createAsyncThunk(
   "detailDataSlice,getDetailData",
   async (title: string = "") => {
     const resp = await axios.get(
-      `https://api.upbit.com/v1/candles/days?market=${title}&count=30`,
+      `https://api.upbit.com/v1/candles/days?market=${title}&count=10`,
       {
         headers: { accept: "application/json" },
       }

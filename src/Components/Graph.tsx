@@ -66,28 +66,26 @@ const Graph = () => {
         .attr("transform", `translate(100,0)`)
         .call(yAxis);
 
-      xAxisGroup.selectAll("text").remove();
-
       const lineGenerator = line()
         .x((d: any, i: number) => xScale(date[i])! + 125)
         .y((d: any) => yScale(d.opening_price))
         .curve(curveLinear);
 
-      svg
-        .append("g")
-        .attr("transform", `translate(100,0)`)
-        .selectAll("circle")
-        .data(detailData)
-        .enter()
-        .append("circle")
-        .attr("r", 5)
-        .attr("height", (d: any) => 300 - yScale(d.opening_price))
-        .attr(
-          "cx",
-          (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
-        )
-        .attr("cy", (d: any) => yScale(d.opening_price))
-        .attr("fill", "#6365dd");
+      // svg
+      //   .append("g")
+      //   .attr("transform", `translate(100,0)`)
+      //   .selectAll("circle")
+      //   .data(detailData)
+      //   .enter()
+      //   .append("circle")
+      //   .attr("r", 5)
+      //   .attr("height", (d: any) => 300 - yScale(d.opening_price))
+      //   .attr(
+      //     "cx",
+      //     (d: any) => xScale(d.candle_date_time_kst.slice(-13, -9))! + 25
+      //   )
+      //   .attr("cy", (d: any) => yScale(d.opening_price))
+      //   .attr("fill", "#6365dd");
 
       // 원
 
@@ -163,7 +161,9 @@ const Graph = () => {
 export default Graph;
 
 const GraphBox = styled.svg`
-  padding: 30px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
   width: 800px;
-  height: 310px;
+  height: 400px;
 `;
