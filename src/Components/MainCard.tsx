@@ -19,7 +19,6 @@ const MainCard = ({
     return state.detailData.dataInfo;
   });
   const [data, setData] = useState<any>();
-  const [icon, setIcon] = useState<string>("/images/logo.png");
 
   const getData = async (name: string) => {
     const res = await axios.get(
@@ -28,15 +27,7 @@ const MainCard = ({
     setData(res.data[0]);
   };
 
-  const getIcons = async () => {
-    const res = await axios.get("/data/icons.json");
-    res.data.filter((icon: any) => {
-      if (icon.name === item) {
-        const src = icon.src;
-        return setIcon(src);
-      }
-    });
-  };
+  const as = Math.floor(Math.random() * 9) + 1;
 
   const roundedNum = Math.ceil(data?.change_rate * 10000) / 10000;
   const roundedStr = roundedNum.toFixed(2);
@@ -45,7 +36,6 @@ const MainCard = ({
 
   useEffect(() => {
     getData(item);
-    getIcons();
   }, [localData]);
 
   return (
@@ -54,7 +44,7 @@ const MainCard = ({
         <BoxColor changes={changes} isSelect={isSelect}>
           <Grid container alignItems="center" p={1}>
             <Grid item xs={2} sm={2} md={2} lg={2}>
-              <Img src={icon}></Img>
+              <Img src={`/images/${as}.png`}></Img>
             </Grid>
             <Grid item xs={8} sm={8} md={8} lg={8} p={1}>
               <Typography variant="body2">{data?.market}</Typography>

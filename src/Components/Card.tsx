@@ -2,9 +2,7 @@ import { Box, Button, Container, Grid } from "@mui/material";
 import { addMyData } from "../Store/myDataSlice";
 import { useAppDispatch } from "../Store/store";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 const style = {
   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -43,13 +41,15 @@ const Card = ({
     }
   };
 
+  const as = Math.floor(Math.random() * 9) + 1;
+
   return (
     <>
       <Container>
         <Box sx={style}>
           <Grid container p={2} padding={2}>
             <Grid item xs={4} sm={4} md={4} lg={4}>
-              <Img src={`/images/${item.market}.png`} alt={"icon"}></Img>
+              <Img src={`/images/${as}.png`} alt={"icon"}></Img>
             </Grid>
             <Grid item xs={8} sm={8} md={8} lg={8}>
               <Grid>
