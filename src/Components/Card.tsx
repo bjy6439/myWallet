@@ -38,6 +38,7 @@ const Card = ({
         return item !== data;
       });
       localStorage.setItem("data", JSON.stringify(delData));
+      setLocalData(delData);
     }
   };
 
@@ -89,4 +90,9 @@ export default Card;
 const Img = styled.img`
   width: 100%;
   height: 100%;
+`;
+
+const Btns = styled.button`
+  background-color: none;
+  border: none;
 `;
