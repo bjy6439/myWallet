@@ -27,7 +27,9 @@ const Graph = () => {
 
   const a = detailData[0]?.market.indexOf("KRW") !== -1 ? "₩" : "$";
 
-  const noData = localStorage.getItem("data") === "[]";
+  const noData =
+    localStorage.getItem("data") === "[]" ||
+    localStorage.getItem("data") === null;
 
   const ref = useRef<SVGSVGElement | null>(null);
 

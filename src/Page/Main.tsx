@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navigation from "../Components/Navigation";
 import Graph from "../Components/Graph";
@@ -37,7 +37,6 @@ const Main = () => {
   };
 
   useEffect(() => {
-    // localStorage.setItem("data", "");
     setTimeout(() => {
       dispatch(getDetailData(`${ccc}`));
     }, 1000);
