@@ -55,7 +55,7 @@ const Login = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={10}>
-                    <Grid>
+                    <Grid item xs={12} sm={12} md={10}>
                       <TextField
                         sx={InputStyle}
                         label="ID를 입력해주세요."
@@ -69,6 +69,16 @@ const Login = () => {
                       label="PW를 입력해주세요."
                     ></TextField>
                   </Grid>
+
+                  <Grid item xs={12} md={12} sm={12}>
+                    <Button
+                      onClick={() => {
+                        kakaoLogin();
+                      }}
+                    >
+                      <KakaoImg src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png"></KakaoImg>
+                    </Button>
+                  </Grid>
                   <Grid item xs={10}>
                     <ButtonGroup sx={BtnGroup}>
                       <Button variant="text">Login</Button>
@@ -81,25 +91,6 @@ const Login = () => {
                         SignUp
                       </Button>
                     </ButtonGroup>
-                  </Grid>
-                  <Grid item p={3}>
-                    <Button
-                      onClick={() => {
-                        kakaoLogin();
-                      }}
-                    >
-                      카카오로 로그인하기
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        dispatch(onModal());
-                        setTimeout(() => {
-                          dispatch(closeModal());
-                        }, 1500);
-                      }}
-                    >
-                      네이버로 로그인하기
-                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
@@ -115,6 +106,7 @@ const Login = () => {
 export default Login;
 
 const Formstyle = {
+  width: 400,
   borderRadius: 4,
   boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
   display: "flex",
@@ -123,7 +115,7 @@ const Formstyle = {
 };
 
 const InputStyle = {
-  width: 250,
+  width: 300,
   height: 50,
   margin: 1,
 };
@@ -158,4 +150,9 @@ const LogoImg = styled.img`
   margin: 10px;
   width: 100px;
   cursor: pointer;
+`;
+
+const KakaoImg = styled.img`
+  width: 200px;
+  margin: 10px;
 `;
