@@ -7,7 +7,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AlertModal from "../Components/AlertModal";
@@ -16,7 +15,6 @@ import { REDIRECT_URI, REST_API_KEY } from "../Components/SecreatKey";
 const Login = () => {
   const nav = useNavigate();
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
