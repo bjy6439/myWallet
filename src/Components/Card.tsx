@@ -32,13 +32,11 @@ const Card = ({ item }: { item: data }) => {
       const newData = [...localData, data];
       localStorage.setItem("data", JSON.stringify(newData));
       setLocalData(newData);
-      // window.location.reload();
     } else {
       const delData = localData.filter((item: string) => {
         return item !== data;
       });
       localStorage.setItem("data", JSON.stringify(delData));
-      // window.location.reload();
     }
   };
 

@@ -5,7 +5,6 @@ import Graph from "../Components/Graph";
 import { useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import MainCard from "../Components/MainCard";
-import axios from "axios";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -13,8 +12,6 @@ const Main = () => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
-
-  console.log(localData);
 
   const storedData = localStorage.getItem("data");
   const initialData: string | null = storedData
@@ -80,7 +77,11 @@ const Main = () => {
                               dispatch(getDetailData(item));
                             }}
                           >
-                            <MainCard item={item} delLocalData={delLocalData} />
+                            <MainCard
+                              item={item}
+                              delLocalData={delLocalData}
+                              localData={localData}
+                            />
                           </Grid>
                         );
                       })}

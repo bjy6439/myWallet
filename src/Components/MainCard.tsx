@@ -9,9 +9,11 @@ import { RootState } from "../Store/store";
 const MainCard = ({
   item,
   delLocalData,
+  localData,
 }: {
   item: string;
   delLocalData: any;
+  localData: any;
 }) => {
   const detailData: any = useSelector((state: RootState) => {
     return state.detailData.dataInfo;
@@ -23,17 +25,15 @@ const MainCard = ({
     const res = await axios.get(
       `https://api.upbit.com/v1/candles/days?market=${name}&count=1`
     );
-    await setData(res.data[0]);
+    setData(res.data[0]);
   };
 
   const getIcons = async () => {
     const res = await axios.get("/data/icons.json");
     res.data.filter((icon: any) => {
-      console.log(1);
-      if (icon.name === data?.market) {
-        return setIcon(icon.src);
-      } else {
-        setIcon("images/logo.png");
+      if (icon.name === item) {
+        const src = icon.src;
+        return setIcon(src);
       }
     });
   };
@@ -42,35 +42,45 @@ const MainCard = ({
   const roundedStr = roundedNum.toFixed(2);
   const changes = data?.change_price < 0;
   const isSelect = detailData[0]?.market === data?.market;
+
   useEffect(() => {
-    getData(item);
-    getIcons();
-  }, []);
+    const fetchData = async () => {
+      await getData(item);
+      await getIcons();
+    };
+    fetchData();
+  }, [localData]);
+
+  console.log(icon);
 
   return (
-    <BoxColor changes={changes} isSelect={isSelect}>
-      <Grid container alignItems="center" p={1}>
-        <Grid item xs={2} sm={2} md={2} lg={2}>
-          <Img src={icon}></Img>
-        </Grid>
-        <Grid item xs={8} sm={8} md={8} lg={8} p={1}>
-          <Typography variant="body2">{data?.market}</Typography>
-          <Typography variant="body2">
-            {changes ? "" : "+"}
-            {roundedStr}%
-          </Typography>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1}>
-          <Button
-            onClick={() => {
-              delLocalData(data.market);
-            }}
-          >
-            <RiDeleteBin6Line />
-          </Button>
-        </Grid>
-      </Grid>
-    </BoxColor>
+    <>
+      {data && (
+        <BoxColor changes={changes} isSelect={isSelect}>
+          <Grid container alignItems="center" p={1}>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
+              <Img src={icon}></Img>
+            </Grid>
+            <Grid item xs={8} sm={8} md={8} lg={8} p={1}>
+              <Typography variant="body2">{data?.market}</Typography>
+              <Typography variant="body2">
+                {changes ? "" : "+"}
+                {roundedStr}%
+              </Typography>
+            </Grid>
+            <Grid item xs={1} sm={1} md={1} lg={1}>
+              <Button
+                onClick={() => {
+                  delLocalData(data.market);
+                }}
+              >
+                <RiDeleteBin6Line />
+              </Button>
+            </Grid>
+          </Grid>
+        </BoxColor>
+      )}
+    </>
   );
 };
 
