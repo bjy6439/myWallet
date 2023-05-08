@@ -5,6 +5,8 @@ import Graph from "../Components/Graph";
 import { useAppDispatch } from "../Store/store";
 import { getDetailData } from "../Store/detailDataSlice";
 import MainCard from "../Components/MainCard";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +32,30 @@ const Main = () => {
     dispatch(getDetailData(`${initialData}`));
   }, []);
 
+  const location = useLocation();
+  const KakaoCode = location.search.split("=")[1];
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.post("https://kapi.kakao.com/v2/user/me", {
+        headers: {
+          Authorization: `Bearer ${KakaoCode}`,
+        },
+      });
+      const userInfo = response.data;
+      console.log(1);
+      console.log(userInfo); // 받아온 사용자 정보 콘솔에 출력
+      // 받아온 사용자 정보를 원하는 방식으로 처리해주세요.
+    } catch (error) {
+      console.log(2);
+      console.error(error);
+      // 에러 처리를 해주세요.
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <Container>
       <Box
@@ -44,6 +70,8 @@ const Main = () => {
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Navigation />
           </Grid>
+          <button onClick={getUserInfo}>123</button>
+
           <Grid item xs={12} sm={12} md={9} lg={9}>
             <Box>
               <Grid container spacing={2} justifyContent="center">
