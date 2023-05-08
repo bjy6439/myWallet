@@ -7,6 +7,7 @@ import { logout } from "../Store/authSlice";
 import { RootState, useAppDispatch } from "../Store/store";
 import styled from "styled-components";
 import { setButton } from "../Store/buttonSlice";
+import { useEffect } from "react";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -15,11 +16,12 @@ const Navigation = () => {
   const setBtn = useSelector((state: RootState) => state.button.button);
 
   const clickBtn = (name: string) => {
-    dispatch(setButton(name));
     if (name === "Dashboard") {
       navigate("/");
+      dispatch(setButton(name));
     } else if (name === "All board") {
       navigate("/all");
+      dispatch(setButton(name));
     } else {
       dispatch(onModal());
       setTimeout(() => {

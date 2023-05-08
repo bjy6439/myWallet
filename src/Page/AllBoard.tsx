@@ -10,9 +10,11 @@ import styled from "styled-components";
 const AllBoard = () => {
   const market = useSelector((state: RootState) => state.mydata.myData);
   const dispatch = useAppDispatch();
+  const [nowBtn, setNowBtn] = useState<string>("BTC");
 
   useEffect(() => {
     dispatch(getAllData());
+    localStorage.setItem("category", "BTC");
   }, []);
 
   return (
@@ -44,10 +46,10 @@ const AllBoard = () => {
                   return (
                     <Grid item key={id} textAlign="center">
                       <NavBtn
-                        primery={localStorage.getItem("category") === name}
+                        primery={nowBtn === name}
                         onClick={() => {
                           localStorage.setItem("category", name);
-                          window.location.reload();
+                          setNowBtn(name);
                         }}
                       >
                         {name}

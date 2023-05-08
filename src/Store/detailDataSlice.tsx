@@ -11,7 +11,7 @@ const initialState: modalState = {
 
 export const getDetailData = createAsyncThunk(
   "detailDataSlice,getDetailData",
-  async (title: string = "USDT-ETH") => {
+  async (title: string = "") => {
     const resp = await axios.get(
       `https://api.upbit.com/v1/candles/days?market=${title}&count=30`,
       {
