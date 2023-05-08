@@ -27,7 +27,7 @@ const Graph = () => {
 
   const a = detailData[0]?.market.indexOf("KRW") !== -1 ? "₩" : "$";
 
-  const noData = localStorage.getItem("data")?.length === 2;
+  const noData = localStorage.getItem("data") === "[]";
 
   const ref = useRef<SVGSVGElement | null>(null);
 
@@ -115,14 +115,14 @@ const Graph = () => {
       <Grid
         container
         sx={{
+          height: "50vh",
           overflow: "scroll",
           "&::-webkit-scrollbar": { display: "none" },
         }}
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        alignItems="flex-start"
-        m={3}
+        alignItems="center"
       >
         <Grid>
           <p>{detailData[0]?.market}</p>
@@ -130,13 +130,11 @@ const Graph = () => {
         {noData ? (
           <Grid
             sx={{
-              height: "500px",
               display: "flex",
-              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
             }}
-            item
             xs={12}
             sm={12}
             md={12}
@@ -162,6 +160,6 @@ export default Graph;
 
 const GraphBox = styled.svg`
   padding: 30px;
-  width: 700px;
+  width: 800px;
   height: 310px;
 `;

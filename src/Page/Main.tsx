@@ -37,6 +37,7 @@ const Main = () => {
   };
 
   useEffect(() => {
+    // localStorage.setItem("data", "");
     setTimeout(() => {
       dispatch(getDetailData(`${ccc}`));
     }, 1000);
