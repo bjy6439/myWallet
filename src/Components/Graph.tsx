@@ -126,9 +126,6 @@ const Graph = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid>
-          <p>{detailData[0]?.market}</p>
-        </Grid>
         {noData ? (
           <Grid
             sx={{
@@ -147,11 +144,16 @@ const Graph = () => {
             </Link>
           </Grid>
         ) : (
-          <GraphBox ref={ref}>
-            <g>
-              <rect></rect>
-            </g>
-          </GraphBox>
+          <>
+            <Grid>
+              <p>{detailData[0]?.market}</p>
+            </Grid>
+            <GraphBox ref={ref}>
+              <g>
+                <rect></rect>
+              </g>
+            </GraphBox>
+          </>
         )}
       </Grid>
     </>
