@@ -22,14 +22,13 @@ const Main = () => {
     const newData = localData.filter((item) => {
       return item !== name;
     });
-
     setLocalData(newData);
     localStorage.setItem("data", JSON.stringify(newData));
   };
 
   useEffect(() => {
     dispatch(getDetailData(`${initialData}`));
-  });
+  }, []);
 
   return (
     <Container>

@@ -18,14 +18,17 @@ interface data {
   english_name: string;
 }
 
-const Card = ({ item }: { item: data }) => {
+const Card = ({
+  item,
+  localData,
+  setLocalData,
+}: {
+  item: data;
+  localData: any;
+  setLocalData: any;
+}) => {
   const dispatch = useAppDispatch();
   const eName = item.english_name;
-  const [localData, setLocalData] = useState(() => {
-    const data = localStorage.getItem("data");
-    return data ? JSON.parse(data) : [];
-  });
-  const [icon, setIcon] = useState<string>("/images/logo.png");
 
   const addLocalData = (data: string) => {
     if (!localData.includes(data)) {
@@ -40,30 +43,13 @@ const Card = ({ item }: { item: data }) => {
     }
   };
 
-  const getIcons = async () => {
-    const res = await axios.get("/data/icons.json");
-    res.data.filter((icon: any) => {
-      if (icon.name === item.market) {
-        return setIcon(icon.src);
-      }
-    });
-  };
-
-  useEffect(() => {
-    getIcons();
-    setLocalData(() => {
-      const data = localStorage.getItem("data");
-      return data ? JSON.parse(data) : [];
-    });
-  }, [localData]);
-
   return (
     <>
       <Container>
         <Box sx={style}>
           <Grid container p={2} padding={2}>
             <Grid item xs={4} sm={4} md={4} lg={4}>
-              <Img src={icon} alt={"icon"}></Img>
+              <Img src={`/images/${item.market}.png`} alt={"icon"}></Img>
             </Grid>
             <Grid item xs={8} sm={8} md={8} lg={8}>
               <Grid>

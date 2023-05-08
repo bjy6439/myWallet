@@ -44,14 +44,9 @@ const MainCard = ({
   const isSelect = detailData[0]?.market === data?.market;
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getData(item);
-      await getIcons();
-    };
-    fetchData();
+    getData(item);
+    getIcons();
   }, [localData]);
-
-  console.log(icon);
 
   return (
     <>

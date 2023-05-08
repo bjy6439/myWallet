@@ -11,6 +11,11 @@ const AllBoard = () => {
   const market = useSelector((state: RootState) => state.mydata.myData);
   const dispatch = useAppDispatch();
   const [nowBtn, setNowBtn] = useState<string>("BTC");
+  const [localData, setLocalData] = useState(() => {
+    const data = localStorage.getItem("data");
+    return data ? JSON.parse(data) : [];
+  });
+  console.log(localData);
 
   useEffect(() => {
     dispatch(getAllData());
@@ -81,7 +86,11 @@ const AllBoard = () => {
                     .map((item: any) => {
                       return (
                         <Grid item xs={12} sm={12} md={6} key={item.market}>
-                          <Card item={item} />
+                          <Card
+                            item={item}
+                            localData={localData}
+                            setLocalData={setLocalData}
+                          />
                         </Grid>
                       );
                     })}
