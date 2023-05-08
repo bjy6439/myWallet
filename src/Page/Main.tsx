@@ -13,35 +13,26 @@ const Main = () => {
     const data = localStorage.getItem("data");
     return data ? JSON.parse(data) : [];
   });
-  const [datas, setDatas] = useState<any>([]);
 
-  const getData = async (name: string) => {
-    const res = await axios.get(
-      `https://api.upbit.com/v1/candles/days?market=${name}&count=1`
-    );
-    setDatas((prev: any) => {
-      const newDatas = [...prev, res.data[0]];
-      return newDatas;
-    });
-  };
+  console.log(localData);
 
   const storedData = localStorage.getItem("data");
-  const ccc: string | null = storedData
+  const initialData: string | null = storedData
     ? JSON.parse(storedData)[0]
     : "USDT-ETH";
 
-  const getItem = () => {
-    localData.map((item: string) => {
-      return getData(item);
+  const delLocalData = (name: string) => {
+    const newData = localData.filter((item) => {
+      return item !== name;
     });
+
+    setLocalData(newData);
+    localStorage.setItem("data", JSON.stringify(newData));
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(getDetailData(`${ccc}`));
-    }, 1000);
-    getItem();
-  }, []);
+    dispatch(getDetailData(`${initialData}`));
+  });
 
   return (
     <Container>
@@ -75,21 +66,21 @@ const Main = () => {
                       }}
                       m={2}
                     >
-                      {datas.map((item: any) => {
+                      {localData.map((item: any) => {
                         return (
                           <Grid
                             item
-                            key={item.market}
+                            key={item}
                             xs={12}
                             sm={5}
                             md={5}
                             lg={5}
                             m={1}
                             onClick={() => {
-                              dispatch(getDetailData(item.market));
+                              dispatch(getDetailData(item));
                             }}
                           >
-                            <MainCard data={item} />
+                            <MainCard item={item} delLocalData={delLocalData} />
                           </Grid>
                         );
                       })}
