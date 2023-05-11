@@ -59,6 +59,7 @@ const Main = () => {
                         overflowY: "scroll",
                         display: "flex",
                         justifyContent: "center",
+                        "&::-webkit-scrollbar": { display: "none" },
                       }}
                       m={2}
                     >

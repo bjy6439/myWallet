@@ -142,14 +142,14 @@ const Graph = () => {
             </Link>
           </Grid>
         ) : (
-          <Grid>
+          <>
             <p>{detailData[0]?.market}</p>
             <GraphBox ref={ref}>
               <g>
                 <rect></rect>
               </g>
             </GraphBox>
-          </Grid>
+          </>
         )}
       </Grid>
     </>
