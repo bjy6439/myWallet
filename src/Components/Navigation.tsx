@@ -43,15 +43,15 @@ const Navigation = () => {
               <LogoImg src="/images/logo.png" alt="logo" />
             </Logo>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} alignItems="center" justifyContent="center">
             <Grid container mb={3} textAlign="center">
               {BUTTONLIST.map(({ id, name }: { id: number; name: string }) => {
                 return (
                   <Grid
                     item
                     key={id}
-                    xs={3}
-                    sm={3}
+                    xs={4}
+                    sm={4}
                     md={12}
                     p={1}
                     textAlign="center"
@@ -67,7 +67,7 @@ const Navigation = () => {
                   </Grid>
                 );
               })}
-              <Grid item xs={3} sm={3} md={12} textAlign="center">
+              <Grid item xs={4} sm={4} md={12} p={1} textAlign="center">
                 <NavBtn
                   onClick={() => {
                     if (isLogin) {
