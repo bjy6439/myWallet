@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import {
   axisBottom,
   axisLeft,
@@ -11,12 +11,13 @@ import {
 } from "d3";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../Store/store";
+import { RootState, useAppDispatch } from "../Store/store";
 import { select } from "d3-selection";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { setButton } from "../Store/buttonSlice";
 
 const Graph = () => {
+  const dispatch = useAppDispatch();
   const [selection, setSelection] = useState<any>(null);
   const svg = select("svg")
     .call((g) => g.select("svg").remove())
@@ -137,9 +138,14 @@ const Graph = () => {
             md={12}
           >
             <p>스크랩한 종목이 없습니다.</p>
-            <Link style={{ margin: "10px", textDecoration: "none" }} to="/all">
+            <Button
+              style={{ margin: "10px", textDecoration: "none" }}
+              onClick={() => {
+                dispatch(setButton("All board"));
+              }}
+            >
               종목 선택하러가기
-            </Link>
+            </Button>
           </Grid>
         ) : (
           <>
