@@ -15,8 +15,10 @@ import { RootState, useAppDispatch } from "../Store/store";
 import { select } from "d3-selection";
 import styled from "styled-components";
 import { setButton } from "../Store/buttonSlice";
+import { useNavigate } from "react-router-dom";
 
 const Graph = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [selection, setSelection] = useState<any>(null);
   const svg = select("svg")
@@ -141,6 +143,7 @@ const Graph = () => {
             <Button
               style={{ margin: "10px", textDecoration: "none" }}
               onClick={() => {
+                navigate("/all");
                 dispatch(setButton("All board"));
               }}
             >
